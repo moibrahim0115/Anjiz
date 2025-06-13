@@ -2,51 +2,78 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#1a1b2e">
     <title>ANJIZ-Task Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --primary-light: #818cf8;
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --luxury-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            --surface-0: #0a0a0f;
-            --surface-1: #1a1a2e;
-            --surface-2: #16213e;
-            --surface-3: #0f3460;
-            --surface-4: #533483;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --text-primary: #ffffff;
+            /* الألوان الأساسية - محسنة للهواتف */
+            --primary: #5b5ffc;
+            --primary-dark: #4338ca;
+            --primary-light: #7c3aed;
+            --primary-gradient: linear-gradient(135deg, #5b5ffc 0%, #7c3aed 100%);
+            --secondary-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            --luxury-gradient: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+            
+            /* خلفيات داكنة - محسنة للهواتف */
+            --surface-0: #0f0f14;
+            --surface-1: #1a1b2e;
+            --surface-2: #212548;
+            --surface-3: #2a2d5a;
+            --surface-4: #3a3d6b;
+            
+            /* زجاج شفاف */
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            
+            /* نصوص - ألوان واضحة للهواتف */
+            --text-primary: #f8fafc;
             --text-secondary: #e2e8f0;
             --text-tertiary: #94a3b8;
             --text-accent: #fbbf24;
-            --success: #10b981;
+            
+            /* ألوان الحالة */
+            --success: #22c55e;
             --warning: #f59e0b;
             --danger: #ef4444;
             --danger-hover: #dc2626;
             --info: #3b82f6;
+            
+            /* المسافات */
             --space-xs: 4px;
             --space-sm: 8px;
             --space-md: 12px;
             --space-lg: 16px;
             --space-xl: 24px;
             --space-2xl: 32px;
+            
+            /* الحواف المدورة */
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
             --radius-xl: 20px;
             --radius-full: 9999px;
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
-            --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.6);
-            --shadow-luxury: 0 20px 40px rgba(102, 102, 255, 0.2);
-            --shadow-glow: 0 0 30px rgba(102, 102, 255, 0.3);
+            
+            /* الظلال - محسنة للهواتف */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.6);
+            --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.7);
+            --shadow-luxury: 0 8px 32px rgba(91, 95, 252, 0.3);
+            --shadow-glow: 0 0 20px rgba(91, 95, 252, 0.4);
+        }
+        
+        /* إعدادات خاصة بالهواتف */
+        @media (max-width: 768px) {
+            :root {
+                --space-xl: 20px;
+                --space-2xl: 24px;
+                --shadow-lg: 0 4px 15px rgba(0, 0, 0, 0.6);
+                --shadow-xl: 0 8px 25px rgba(0, 0, 0, 0.7);
+            }
         }
 
         * {
@@ -55,9 +82,31 @@
             box-sizing: border-box;
             transition: all 0.2s ease;
         }
+        
+        /* إعدادات عامة لتحسين العرض على الهواتف */
+        html {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        
+        /* تحسين الألوان للشاشات المختلفة */
+        @supports (color-gamut: p3) {
+            :root {
+                --primary: color(display-p3 0.357 0.373 0.988);
+                --primary-light: color(display-p3 0.486 0.231 0.929);
+            }
+        }
+        
+        @supports (color-gamut: rec2020) {
+            :root {
+                --primary: color(rec2020 0.357 0.373 0.988);
+                --primary-light: color(rec2020 0.486 0.231 0.929);
+            }
+        }
 
         body {
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 25%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, var(--surface-0) 0%, var(--surface-1) 25%, var(--surface-2) 50%, var(--surface-3) 100%);
             background-attachment: fixed;
             color: var(--text-primary);
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -65,6 +114,8 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body::before {
@@ -75,11 +126,25 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(91, 95, 252, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
             pointer-events: none;
             z-index: -1;
+        }
+        
+        /* تحسينات للهواتف */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+                background-attachment: scroll;
+            }
+            
+            body::before {
+                background: 
+                    radial-gradient(circle at 30% 70%, rgba(91, 95, 252, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 70% 30%, rgba(124, 58, 237, 0.08) 0%, transparent 50%);
+            }
         }
 
         .container {
@@ -140,11 +205,11 @@
         .header h1 {
             font-family: 'Playfair Display', serif;
             background: linear-gradient(135deg, 
-                #667eea 0%, 
-                #764ba2 25%, 
-                #f093fb 50%, 
-                #f5576c 75%, 
-                #4facfe 100%);
+                #5b5ffc 0%, 
+                #7c3aed 25%, 
+                #06b6d4 50%, 
+                #3b82f6 75%, 
+                #8b5cf6 100%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -158,7 +223,23 @@
             text-align: center;
             line-height: 1.2;
             text-transform: capitalize;
-            filter: drop-shadow(0 4px 12px rgba(102, 126, 234, 0.3));
+            filter: drop-shadow(0 4px 12px rgba(91, 95, 252, 0.4));
+        }
+        
+        /* تحسينات العنوان للهواتف */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+                letter-spacing: -1px;
+                filter: drop-shadow(0 2px 8px rgba(91, 95, 252, 0.3));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2rem;
+                letter-spacing: -0.5px;
+            }
         }
 
         .header h1::before {
@@ -169,10 +250,10 @@
             right: -10px;
             bottom: -10px;
             background: linear-gradient(45deg, 
-                rgba(102, 126, 234, 0.1),
-                rgba(118, 75, 162, 0.1),
-                rgba(240, 147, 251, 0.1),
-                rgba(245, 87, 108, 0.1));
+                rgba(91, 95, 252, 0.08),
+                rgba(124, 58, 237, 0.08),
+                rgba(6, 182, 212, 0.08),
+                rgba(59, 130, 246, 0.08));
             border-radius: 20px;
             z-index: -1;
             animation: glow-pulse 3s ease-in-out infinite;
@@ -223,7 +304,7 @@
 
         .header h1:hover {
             transform: translateY(-5px);
-            filter: drop-shadow(0 8px 20px rgba(102, 126, 234, 0.5));
+            filter: drop-shadow(0 8px 20px rgba(91, 95, 252, 0.6));
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -247,9 +328,9 @@
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                0 0 20px rgba(99, 102, 241, 0.1);
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                0 0 20px rgba(91, 95, 252, 0.15);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
@@ -289,10 +370,10 @@
         .quote:hover {
             transform: translateY(-2px);
             box-shadow: 
-                0 12px 40px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15),
-                0 0 30px rgba(99, 102, 241, 0.2);
-            border-color: rgba(255, 255, 255, 0.2);
+                0 12px 40px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                0 0 30px rgba(91, 95, 252, 0.25);
+            border-color: rgba(255, 255, 255, 0.18);
         }
 
         .quote-content {
@@ -344,7 +425,7 @@
         }
 
         .copyright a {
-            color: #667eea;
+            color: #5b5ffc;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
@@ -352,7 +433,7 @@
         }
 
         .copyright a:hover {
-            color: #764ba2;
+            color: #7c3aed;
         }
 
         #year {
@@ -360,11 +441,115 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
-        /* Responsive Design */
+        /* Responsive Design - تحسينات للهواتف */
         @media (max-width: 768px) {
             .copyright p {
                 font-size: 13px;
                 line-height: 1.4;
+            }
+            
+            .quote {
+                font-size: 16px;
+                padding: var(--space-lg) var(--space-xl);
+                box-shadow: 
+                    0 4px 20px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                    0 0 15px rgba(91, 95, 252, 0.12);
+            }
+            
+            .container {
+                padding: var(--space-xl);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .quote {
+                font-size: 15px;
+                padding: var(--space-md) var(--space-lg);
+            }
+            
+            .container {
+                padding: var(--space-lg);
+                margin: 0 8px;
+            }
+        }
+        
+        /* تحسينات لأجهزة iPhone وAndroid */
+        @media (-webkit-min-device-pixel-ratio: 2) {
+            body {
+                -webkit-text-stroke: 0.01em rgba(255, 255, 255, 0.1);
+            }
+            
+            .header h1 {
+                -webkit-text-stroke: 0.005em rgba(91, 95, 252, 0.1);
+            }
+        }
+        
+        /* دعم الألوان عالية التباين */
+        @media (prefers-contrast: high) {
+            :root {
+                --text-primary: #ffffff;
+                --text-secondary: #f1f5f9;
+                --glass-border: rgba(255, 255, 255, 0.3);
+            }
+        }
+        
+        /* دعم الألوان للوضع الداكن المفضل */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --surface-0: #0c0c12;
+                --surface-1: #161622;
+                --surface-2: #1f1f2e;
+            }
+        }
+        
+        /* تحسينات إضافية للهواتف المحمولة */
+        @media screen and (max-device-width: 812px) {
+            body {
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+            }
+            
+            .container {
+                will-change: transform;
+                transform: translateZ(0);
+            }
+            
+            .header h1 {
+                will-change: filter;
+                transform: translateZ(0);
+            }
+        }
+        
+        /* تحسينات لشاشات Retina وHDPI */
+        @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+               only screen and (min-resolution: 144dpi) {
+            .header h1 {
+                text-rendering: optimizeLegibility;
+                -webkit-font-smoothing: subpixel-antialiased;
+            }
+            
+            .quote {
+                text-rendering: optimizeLegibility;
+            }
+        }
+        
+        /* دعم الوضع الأفقي للهواتف */
+        @media screen and (orientation: landscape) and (max-height: 500px) {
+            .header h1 {
+                font-size: 2rem;
+                margin-bottom: var(--space-md);
+            }
+            
+            .quote {
+                font-size: 14px;
+                padding: var(--space-md) var(--space-lg);
+            }
+            
+            .container {
+                padding: var(--space-lg);
             }
         }
 
