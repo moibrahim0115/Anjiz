@@ -973,7 +973,8 @@
 
         .input-container {
             display: flex;
-            align-items: stretch;
+            align-items: center;
+            justify-content: center;
             margin-bottom: var(--space-xl);
             gap: var(--space-lg);
             flex-wrap: wrap;
@@ -1582,6 +1583,156 @@
             color: var(--info) !important;
             background: rgba(59, 130, 246, 0.1) !important;
             border-color: var(--info) !important;
+        }
+
+        /* زر الألوان - تصميم قوي ومميز */
+        .change-category-btn {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, 
+                #22c55e 0%, 
+                #3b82f6 25%, 
+                #f97316 50%, 
+                #ef4444 75%, 
+                #22c55e 100%) !important;
+            background-size: 300% 300% !important;
+            animation: colorFlow 4s ease-in-out infinite !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            color: white !important;
+            font-weight: 700 !important;
+            box-shadow: 
+                0 6px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 0 20px rgba(34, 197, 94, 0.3) !important;
+            backdrop-filter: blur(10px) saturate(150%) !important;
+            -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+        }
+
+        .change-category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent);
+            transition: left 0.6s ease;
+            z-index: 1;
+        }
+
+        .change-category-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                transparent 70%);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+        }
+
+        .change-category-btn i {
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+        }
+
+        .change-category-btn:hover {
+            transform: scale(1.1) translateY(-2px) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+            animation: colorFlow 2s ease-in-out infinite, 
+                       pulseGlow 1.5s ease-in-out infinite !important;
+            box-shadow: 
+                0 12px 30px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 0 0 2px rgba(255, 255, 255, 0.2),
+                0 0 40px rgba(34, 197, 94, 0.5),
+                0 0 60px rgba(59, 130, 246, 0.3) !important;
+        }
+
+        .change-category-btn:hover::before {
+            left: 100%;
+        }
+
+        .change-category-btn:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .change-category-btn:active {
+            transform: scale(1.05) translateY(-1px) !important;
+            animation: colorFlow 1s ease-in-out infinite !important;
+        }
+
+        @keyframes colorFlow {
+            0%, 100% { 
+                background-position: 0% 50%;
+                filter: hue-rotate(0deg) saturate(1.2);
+            }
+            25% { 
+                background-position: 25% 50%;
+                filter: hue-rotate(90deg) saturate(1.4);
+            }
+            50% { 
+                background-position: 50% 50%;
+                filter: hue-rotate(180deg) saturate(1.6);
+            }
+            75% { 
+                background-position: 75% 50%;
+                filter: hue-rotate(270deg) saturate(1.4);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 12px 30px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                    0 0 0 2px rgba(255, 255, 255, 0.2),
+                    0 0 40px rgba(34, 197, 94, 0.5),
+                    0 0 60px rgba(59, 130, 246, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 12px 30px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                    0 0 0 2px rgba(255, 255, 255, 0.3),
+                    0 0 50px rgba(34, 197, 94, 0.7),
+                    0 0 80px rgba(59, 130, 246, 0.5);
+            }
+        }
+
+        /* Light theme للزر */
+        [data-theme="light"] .change-category-btn {
+            background: linear-gradient(135deg, 
+                #16a34a 0%, 
+                #2563eb 25%, 
+                #ea580c 50%, 
+                #dc2626 75%, 
+                #16a34a 100%) !important;
+            border: 2px solid rgba(0, 0, 0, 0.1) !important;
+            box-shadow: 
+                0 6px 20px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 0 0 1px rgba(0, 0, 0, 0.05),
+                0 0 20px rgba(22, 163, 74, 0.2) !important;
+        }
+
+        [data-theme="light"] .change-category-btn:hover {
+            border-color: rgba(0, 0, 0, 0.2) !important;
+            box-shadow: 
+                0 12px 30px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                0 0 0 2px rgba(0, 0, 0, 0.1),
+                0 0 40px rgba(22, 163, 74, 0.3),
+                0 0 60px rgba(37, 99, 235, 0.2) !important;
         }
 
         .task.high-priority {
@@ -2287,13 +2438,16 @@
             .input-container {
                 flex-direction: column;
                 gap: var(--space-md);
-                align-items: stretch;
+                align-items: center;
+                justify-content: center;
             }
 
             .input-container {
                 padding: var(--space-lg);
                 gap: var(--space-md);
                 flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
 
             #taskInput {
