@@ -620,22 +620,6 @@
             opacity: 0.6;
         }
 
-        .quote-number {
-            position: absolute;
-            top: var(--space-md);
-            right: var(--space-md);
-            background: rgba(92, 186, 143, 0.1);
-            color: var(--matrix-green);
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-sm);
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(92, 186, 143, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
         .quote-english {
             font-size: 1rem;
             line-height: 1.6;
@@ -686,13 +670,6 @@
             .quote-english {
                 font-size: 0.85rem;
                 line-height: 1.4;
-            }
-            
-            .quote-number {
-                top: var(--space-sm);
-                right: var(--space-sm);
-                font-size: 0.7rem;
-                padding: 4px 6px;
             }
         }
 
@@ -1360,7 +1337,6 @@
             <h1 class="cyber-header">Anjiz</h1>
             <p class="header-subtitle">'The most beloved deeds to Allah are those done consistently, even if small'   -prophetic hadith</p>
             <div class="quote" id="motivationalQuote">
-                <div class="quote-number">1 / 22</div>
                 <div class="quote-content" id="quoteText"></div>
                 <div class="quote-decorative-line"></div>
                 <span class="quote-author" id="quoteAuthor"></span>
@@ -1527,12 +1503,6 @@
                     
                     quoteTextElement.innerHTML = arabicText + englishText;
                     quoteAuthorElement.textContent = `— ${currentQuote.author}`;
-                    
-                    // إضافة مؤشر رقم الاقتباس
-                    const quoteNumber = document.querySelector('.quote-number');
-                    if (quoteNumber) {
-                        quoteNumber.textContent = `${currentQuoteIndex + 1} / ${quotes.length}`;
-                    }
                     
                     // الانتقال للاقتباس التالي
                     currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
