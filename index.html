@@ -1209,14 +1209,17 @@
 
         .filters {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
             margin-bottom: var(--space-lg);
             flex-wrap: wrap;
-            gap: var(--space-md);
+            gap: var(--space-lg);
         }
 
         .filter-group {
             display: flex;
+            align-items: center;
+            justify-content: center;
             gap: var(--space-xs);
             flex-wrap: wrap;
         }
@@ -2477,12 +2480,14 @@
             }
 
             .filters {
-                flex-direction: column;
-                align-items: stretch;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
             }
 
             .filter-group {
                 justify-content: center;
+                align-items: center;
             }
 
             .task {
