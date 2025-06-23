@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="dark">
     <meta name="theme-color" content="#1a1b2e">
     <title>ANJIZ - Matrix Code Manager</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&family=Source+Code+Pro:wght@300;400;500;600;700;800;900&family=Ubuntu+Mono:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&family=Source+Code+Pro:wght@300;400;500;600;700;800;900&family=Ubuntu+Mono:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&family=Scheherazade+New:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -618,6 +618,82 @@
             margin: var(--space-md) auto;
             border-radius: var(--radius-full);
             opacity: 0.6;
+        }
+
+        .quote-number {
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            background: rgba(92, 186, 143, 0.1);
+            color: var(--matrix-green);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(92, 186, 143, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .quote-english {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-top: var(--space-sm);
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .quote-arabic {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            direction: rtl;
+            text-align: center;
+            font-family: 'Scheherazade New', 'Amiri', 'Aref Ruqaa', 'Times New Roman', serif;
+            font-weight: 500;
+            margin-bottom: var(--space-lg);
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 2px rgba(92, 186, 143, 0.2);
+        }
+
+        /* تحسينات خاصة للهواتف */
+        @media (max-width: 768px) {
+            .quote-arabic {
+                font-size: 1.1rem;
+                line-height: 1.7;
+                letter-spacing: 0.4px;
+                margin-bottom: var(--space-md);
+            }
+            
+            .quote-english {
+                font-size: 0.9rem;
+                line-height: 1.5;
+                letter-spacing: 0.1px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quote-arabic {
+                font-size: 1rem;
+                line-height: 1.6;
+                letter-spacing: 0.3px;
+            }
+            
+            .quote-english {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+            
+            .quote-number {
+                top: var(--space-sm);
+                right: var(--space-sm);
+                font-size: 0.7rem;
+                padding: 4px 6px;
+            }
         }
 
         .footer {
@@ -1284,6 +1360,7 @@
             <h1 class="cyber-header">Anjiz</h1>
             <p class="header-subtitle">'The most beloved deeds to Allah are those done consistently, even if small'   -prophetic hadith</p>
             <div class="quote" id="motivationalQuote">
+                <div class="quote-number">1 / 22</div>
                 <div class="quote-content" id="quoteText"></div>
                 <div class="quote-decorative-line"></div>
                 <span class="quote-author" id="quoteAuthor"></span>
@@ -1341,116 +1418,137 @@
             let sortDirection = 'desc';
             let draggedTask = null;
             let customOrder = false;
+            let currentQuoteIndex = 0; // متغير لتتبع الاقتباس الحالي
 
             const quotes = [
-                
                 {
-                    text: "The key is not to prioritize what's on your schedule, but to schedule your priorities.",
-                    author: "Stephen Covey"
+                    text: "O you who have believed, do not put [yourselves] before Allah and His Messenger but fear Allah. Indeed, Allah is Hearing and Knowing.",
+                    textAr:"يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تُقَدِّمُوا بَيْنَ يَدَيِ اللَّهِ وَرَسُولِهِ ۖ وَاتَّقُوا اللَّهَ ۚ إِنَّ اللَّهَ سَمِيعٌ عَلِيمٌ",
+                    author: "Al-Hujurāt 1"
                 },
                 {
-                    text: "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-                    author: "Winston Churchill"
+                    text: "O you who have believed, do not raise your voices above the voice of the Prophet or be loud to him in speech like the loudness of some of you to others, lest your deeds become worthless while you perceive not.",
+                    textAr: "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَرْفَعُوا أَصْوَاتَكُمْ فَوْقَ صَوْتِ النَّبِيِّ وَلَا تَجْهَرُوا لَهُ بِالْقَوْلِ كَجَهْرِ بَعْضِكُمْ لِبَعْضٍ أَن تَحْبَطَ أَعْمَالُكُمْ وَأَنتُمْ لَا تَشْعُرُونَ",
+                    author: "Al-Hujurāt 2"
                 },
                 {
-                    text: "The difference between ordinary and extraordinary is that little extra.",
-                    author: "Jimmy Johnson"
+                    text: "Indeed, those who lower their voices before the Messenger of Allah - they are the ones whose hearts Allah has tested for righteousness. For them is forgiveness and great reward.",
+                    textAr: "إِنَّ الَّذِينَ يَغُضُّونَ أَصْوَاتَهُمْ عِندَ رَسُولِ اللَّهِ أُولَٰئِكَ الَّذِينَ امْتَحَنَ اللَّهُ قُلُوبَهُمْ لِلتَّقْوَىٰ ۚ لَهُم مَّغْفِرَةٌ وَأَجْرٌ عَظِيمٌ",
+                    author: "Al-Hujurāt 3"
                 },
                 {
-                    text: "Excellence is not a skill, it is an attitude that separates the achiever from the average.",
-                    author: "Unknown"
+                    text: "Indeed, those who call you, [O Muhammad], from behind the chambers - most of them do not use reason.",
+                    textAr: "إِنَّ الَّذِينَ يُنَادُونَكَ مِن وَرَاءِ الْحُجُرَاتِ أَكْثَرُهُمْ لَا يَعْقِلُونَ",
+                    author: "Al-Hujurāt 4"
                 },
                 {
-                    text: "Small daily improvements are the key to staggering long-term results.",
-                    author: "Robin Sharma"
+                    text: "And if they had been patient until you [could] come out to them, it would have been better for them. But Allah is Forgiving and Merciful.",
+                    textAr: "وَلَوْ أَنَّهُمْ صَبَرُوا حَتَّىٰ تَخْرُجَ إِلَيْهِمْ لَكَانَ خَيْرًا لَّهُمْ ۚ وَاللَّهُ غَفُورٌ رَّحِيمٌ",
+                    author: "Al-Hujurāt 5"
                 },
                 {
-                    text: "Your future is created by what you do today, not tomorrow.",
-                    author: "Robert Kiyosaki"
+                    text: "O you who have believed, if there comes to you a disobedient one with information, investigate, lest you harm a people out of ignorance and become, over what you have done, regretful.",
+                    textAr: "يَا أَيُّهَا الَّذِينَ آمَنُوا إِن جَاءَكُمْ فَاسِقٌ بِنَبَإٍ فَتَبَيَّنُوا أَن تُصِيبُوا قَوْمًا بِجَهَالَةٍ فَتُصْبِحُوا عَلَىٰ مَا فَعَلْتُمْ نَادِمِينَ",
+                    author: "Al-Hujurāt 6"
                 },
                 {
-                    text: "The secret of your success is found in your daily routine.",
-                    author: "John C. Maxwell"
+                    text: "And know that among you is the Messenger of Allah. If he were to obey you in much of the matter, you would be in difficulty, but Allah has endeared to you the faith and has made it pleasing in your hearts and has made hateful to you disbelief, defiance and disobedience. Those are the [rightly] guided.",
+                    textAr: "وَاعْلَمُوا أَنَّ فِيكُمْ رَسُولَ اللَّهِ ۚ لَوْ يُطِيعُكُمْ فِي كَثِيرٍ مِّنَ الْأَمْرِ لَعَنِتُّمْ وَلَٰكِنَّ اللَّهَ حَبَّبَ إِلَيْكُمُ الْإِيمَانَ وَزَيَّنَهُ فِي قُلُوبِكُمْ وَكَرَّهَ إِلَيْكُمُ الْكُفْرَ وَالْفُسُوقَ وَالْعِصْيَانَ ۚ أُولَٰئِكَ هُمُ الرَّاشِدُونَ",
+                    author: "Al-Hujurāt 7"
                 },
                 {
-                    text: "Don't count the days, make the days count.",
-                    author: "Muhammad Ali"
+                    text: "[It is] as bounty from Allah and favor. And Allah is Knowing and Wise.",
+                    textAr: "فَضْلًا مِّنَ اللَّهِ وَنِعْمَةً ۚ وَاللَّهُ عَلِيمٌ حَكِيمٌ",
+                    author: "Al-Hujurāt 8"
                 },
                 {
-                    text: "Your talent determines what you can do. Your motivation determines how much you're willing to do. Your attitude determines how well you do it.",
-                    author: "Lou Holtz"
+                    text: "And if two factions among the believers should fight, then make settlement between the two. But if one of them oppresses the other, then fight against the one that oppresses until it returns to the ordinance of Allah. And if it returns, then make settlement between them in justice and act justly. Indeed, Allah loves those who act justly.",
+                    textAr: "وَإِن طَائِفَتَانِ مِنَ الْمُؤْمِنِينَ اقْتَتَلُوا فَأَصْلِحُوا بَيْنَهُمَا ۖ فَإِن بَغَتْ إِحْدَاهُمَا عَلَى الْأُخْرَىٰ فَقَاتِلُوا الَّتِي تَبْغِي حَتَّىٰ تَفِيءَ إِلَىٰ أَمْرِ اللَّهِ ۚ فَإِن فَاءَتْ فَأَصْلِحُوا بَيْنَهُمَا بِالْعَدْلِ وَأَقْسِطُوا ۖ إِنَّ اللَّهَ يُحِبُّ الْمُقْسِطِينَ",
+                    author: "Al-Hujurāt 9"
                 },
                 {
-                    text: "Progress is impossible without change, and those who cannot change their minds cannot change anything.",
-                    author: "George Bernard Shaw"
+                    text: "The believers are but brothers, so make settlement between your brothers. And fear Allah that you may receive mercy.",
+                    textAr: "إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ فَأَصْلِحُوا بَيْنَ أَخَوَيْكُمْ ۚ وَاتَّقُوا اللَّهَ لَعَلَّكُمْ تُرْحَمُونَ",
+                    author: "Al-Hujurāt 10"
                 },
                 {
-                    text: "The only way to do great work is to love what you do.",
-                    author: "Steve Jobs"
+                    text: "O you who have believed, let not a people ridicule [another] people; perhaps they may be better than them; nor let women ridicule [other] women; perhaps they may be better than them. And do not insult one another and do not call each other by [offensive] nicknames. Wretched is the name of disobedience after [one's] faith. And whoever does not repent - then it is those who are the wrongdoers.",
+                    textAr: "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا يَسْخَرْ قَوْمٌ مِّن قَوْمٍ عَسَىٰ أَن يَكُونُوا خَيْرًا مِّنْهُمْ وَلَا نِسَاءٌ مِّن نِّسَاءٍ عَسَىٰ أَن يَكُنَّ خَيْرًا مِّنْهُنَّ ۖ وَلَا تَلْمِزُوا أَنفُسَكُمْ وَلَا تَنَابَزُوا بِالْأَلْقَابِ ۖ بِئْسَ الِاسْمُ الْفُسُوقُ بَعْدَ الْإِيمَانِ ۚ وَمَن لَّمْ يَتُبْ فَأُولَٰئِكَ هُمُ الظَّالِمُونَ",
+                    author: "Al-Hujurāt 11"
                 },
                 {
-                    text: "Innovation distinguishes between a leader and a follower.",
-                    author: "Steve Jobs"
+                    text: "O you who have believed, avoid much [negative] assumption. Indeed, some assumption is sin. And do not spy or backbite each other. Would one of you like to eat the flesh of his brother when dead? You would detest it. And fear Allah; indeed, Allah is Accepting of repentance and Merciful.",
+                    textAr: "يَا أَيُّهَا الَّذِينَ آمَنُوا اجْتَنِبُوا كَثِيرًا مِّنَ الظَّنِّ إِنَّ بَعْضَ الظَّنِّ إِثْمٌ ۖ وَلَا تَجَسَّسُوا وَلَا يَغْتَب بَّعْضُكُم بَعْضًا ۚ أَيُحِبُّ أَحَدُكُمْ أَن يَأْكُلَ لَحْمَ أَخِيهِ مَيْتًا فَكَرِهْتُمُوهُ ۚ وَاتَّقُوا اللَّهَ ۚ إِنَّ اللَّهَ تَوَّابٌ رَّحِيمٌ",
+                    author: "Al-Hujurāt 12"
                 },
                 {
-                    text: "Believe you can and you're halfway there.",
-                    author: "Theodore Roosevelt"
+                    text: "O mankind, indeed We have created you from male and female and made you peoples and tribes that you may know one another. Indeed, the most noble of you in the sight of Allah is the most righteous of you. Indeed, Allah is Knowing and Acquainted.",
+                    textAr: "يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا ۚ إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ ۚ إِنَّ اللَّهَ عَلِيمٌ خَبِيرٌ",
+                    author: "Al-Hujurāt 13"
                 },
                 {
-                    text: "The future belongs to those who believe in the beauty of their dreams.",
-                    author: "Eleanor Roosevelt"
+                    text: "The bedouins say, We have believed. Say, You have not [yet] believed; but say [instead], 'We have submitted,' for faith has not yet entered your hearts. And if you obey Allah and His Messenger, He will not deprive you from your deeds of anything. Indeed, Allah is Forgiving and Merciful.",
+                    textAr: "۞ قَالَتِ الْأَعْرَابُ آمَنَّا ۖ قُل لَّمْ تُؤْمِنُوا وَلَٰكِن قُولُوا أَسْلَمْنَا وَلَمَّا يَدْخُلِ الْإِيمَانُ فِي قُلُوبِكُمْ ۖ وَإِن تُطِيعُوا اللَّهَ وَرَسُولَهُ لَا يَلِتْكُم مِّنْ أَعْمَالِكُمْ شَيْئًا ۚ إِنَّ اللَّهَ غَفُورٌ رَّحِيمٌ",
+                    author: "Al-Hujurāt 14"
                 },
                 {
-                    text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
-                    author: "Will Durant"
+                    text: "The believers are only the ones who have believed in Allah and His Messenger and then doubt not but strive with their properties and their lives in the cause of Allah. It is those who are the truthful.",
+                    textAr: "إِنَّمَا الْمُؤْمِنُونَ الَّذِينَ آمَنُوا بِاللَّهِ وَرَسُولِهِ ثُمَّ لَمْ يَرْتَابُوا وَجَاهَدُوا بِأَمْوَالِهِمْ وَأَنفُسِهِمْ فِي سَبِيلِ اللَّهِ ۚ أُولَٰئِكَ هُمُ الصَّادِقُونَ",
+                    author: "Al-Hujurāt 15"
                 },
                 {
-                    text: "The secret of getting ahead is getting started.",
-                    author: "Mark Twain"
+                    text: "Say, Would you acquaint Allah with your religion while Allah knows whatever is in the heavens and whatever is on the earth, and Allah is Knowing of all things?",
+                    textAr: "قُلْ أَتُعَلِّمُونَ اللَّهَ بِدِينِكُمْ وَاللَّهُ يَعْلَمُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۚ وَاللَّهُ بِكُلِّ شَيْءٍ عَلِيمٌ",
+                    author: "Al-Hujurāt 16"
                 },
                 {
-                    text: "It does not matter how slowly you go as long as you do not stop.",
-                    author: "Confucius"
+                    text: "They consider it a favor to you that they have accepted Islam. Say, Do not consider your Islam a favor to me. Rather, Allah has conferred favor upon you that He has guided you to the faith, if you should be truthful.",
+                    textAr: "يَمُنُّونَ عَلَيْكَ أَنْ أَسْلَمُوا ۖ قُل لَّا تَمُنُّوا عَلَيَّ إِسْلَامَكُم ۖ بَلِ اللَّهُ يَمُنُّ عَلَيْكُمْ أَنْ هَدَاكُمْ لِلْإِيمَانِ إِن كُنتُمْ صَادِقِينَ",
+                    author: "Al-Hujurāt 17"
                 },
                 {
-                    text: "Continuous improvement is better than delayed perfection.",
-                    author: "Mark Twain"
-                },
-                {
-                    text: "The future belongs to those who learn more skills and combine them in creative ways.",
-                    author: "Robert Greene"
-                },
-                {
-                    text: "Your habits will determine your future.",
-                    author: "Jack Canfield"
-                },
-                {
-                    text: "Don't watch the clock; do what it does. Keep going.",
-                    author: "Sam Levenson"
-                },
-                {
-                    text: "A year from now you may wish you had started today.",
-                    author: "Karen Lamb"
+                    text: "Indeed, Allah knows the unseen [aspects] of the heavens and the earth. And Allah is Seeing of what you do.",
+                    textAr: "إِنَّ اللَّهَ يَعْلَمُ غَيْبَ السَّمَاوَاتِ وَالْأَرْضِ ۚ وَاللَّهُ بَصِيرٌ بِمَا تَعْمَلُونَ",
+                    author: "Al-Hujurāt 18"
                 }
+                
             ];
 
             function updateQuote() {
-                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                // استخدام الاقتباس الحالي حسب الترتيب
+                const currentQuote = quotes[currentQuoteIndex];
                 const quoteTextElement = document.getElementById('quoteText');
                 const quoteAuthorElement = document.getElementById('quoteAuthor');
                 
-                if (quoteTextElement && quoteAuthorElement) {
-                    quoteTextElement.textContent = randomQuote.text;
-                    quoteAuthorElement.textContent = `— ${randomQuote.author}`;
+                if (quoteTextElement && quoteAuthorElement && currentQuote) {
+                    // عرض النص العربي أولاً ثم الإنجليزي
+                    const arabicText = currentQuote.textAr ? `<div class="quote-arabic">"${currentQuote.textAr}"</div>` : '';
+                    const englishText = `<div class="quote-english">"${currentQuote.text}"</div>`;
+                    
+                    quoteTextElement.innerHTML = arabicText + englishText;
+                    quoteAuthorElement.textContent = `— ${currentQuote.author}`;
+                    
+                    // إضافة مؤشر رقم الاقتباس
+                    const quoteNumber = document.querySelector('.quote-number');
+                    if (quoteNumber) {
+                        quoteNumber.textContent = `${currentQuoteIndex + 1} / ${quotes.length}`;
+                    }
+                    
+                    // الانتقال للاقتباس التالي
+                    currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
                 }
             }
 
             function startQuoteRotation() {
-                // Update quote immediately
+                // عرض الاقتباس الأول فوراً
                 updateQuote();
                 
-                // Set interval to update quote every 5 minutes (300,000 milliseconds)
+                // تعيين مؤقت لتحديث الاقتباس كل 5 دقائق (300,000 ميلي ثانية)
                 setInterval(updateQuote, 300000);
+                
+                // إضافة مؤشر لعرض الاقتباس الحالي (اختياري)
+                console.log(`تم بدء دورة الاقتباسات - سيتم تغيير الاقتباس كل 5 دقائق`);
+                console.log(`إجمالي عدد الاقتباسات: ${quotes.length}`);
             }
 
             function loadTasks() {
