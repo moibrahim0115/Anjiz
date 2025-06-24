@@ -1238,6 +1238,9 @@
             box-shadow: 
                 0 4px 16px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .filter-btn.active {
@@ -1257,6 +1260,89 @@
             box-shadow: 
                 0 6px 20px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        /* Filter Dots for Basic Buttons */
+        .filter-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            position: relative;
+            margin-right: var(--space-xs);
+            transition: all 0.3s ease;
+        }
+
+        .filter-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: filterPulse 2.5s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .filter-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            transform: translate(-50%, -50%);
+            animation: filterInnerGlow 1.8s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        /* Filter Dot Colors and Specific Animations */
+        .all-dot {
+            background: #10b981;
+            box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
+        }
+
+        .all-dot::before {
+            background: #10b981;
+            box-shadow: 
+                0 0 8px #10b981,
+                0 0 16px rgba(16, 185, 129, 0.6),
+                0 0 24px rgba(16, 185, 129, 0.3);
+            animation: allPulse 2.2s ease-in-out infinite;
+        }
+
+        .active-dot {
+            background: #f59e0b;
+            box-shadow: 0 0 6px rgba(245, 158, 11, 0.8);
+        }
+
+        .active-dot::before {
+            background: #f59e0b;
+            box-shadow: 
+                0 0 8px #f59e0b,
+                0 0 16px rgba(245, 158, 11, 0.6),
+                0 0 24px rgba(245, 158, 11, 0.3);
+            animation: activePulse 2.6s ease-in-out infinite;
+            animation-delay: 0.3s;
+        }
+
+        .completed-dot {
+            background: #6366f1;
+            box-shadow: 0 0 6px rgba(99, 102, 241, 0.8);
+        }
+
+        .completed-dot::before {
+            background: #6366f1;
+            box-shadow: 
+                0 0 8px #6366f1,
+                0 0 16px rgba(99, 102, 241, 0.6),
+                0 0 24px rgba(99, 102, 241, 0.3);
+            animation: completedPulse 3s ease-in-out infinite;
+            animation-delay: 0.6s;
         }
 
         /* Light theme filter buttons */
@@ -1282,6 +1368,989 @@
             box-shadow: 
                 0 6px 20px rgba(31, 38, 135, 0.12),
                 inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        /* Light theme adjustments for filter dots */
+        [data-theme="light"] .filter-dot {
+            filter: brightness(0.85) saturate(1.2);
+        }
+
+        [data-theme="light"] .filter-dot::after {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+        }
+
+        [data-theme="light"] .all-dot {
+            background: #059669;
+            box-shadow: 0 0 8px rgba(5, 150, 105, 0.7);
+        }
+
+        [data-theme="light"] .active-dot {
+            background: #d97706;
+            box-shadow: 0 0 8px rgba(217, 119, 6, 0.7);
+        }
+
+        [data-theme="light"] .completed-dot {
+            background: #4338ca;
+            box-shadow: 0 0 8px rgba(67, 56, 202, 0.7);
+        }
+
+        [data-theme="light"] .all-dot::before {
+            background: #059669;
+            box-shadow: 
+                0 0 10px #059669,
+                0 0 20px rgba(5, 150, 105, 0.5),
+                0 0 30px rgba(5, 150, 105, 0.3);
+        }
+
+        [data-theme="light"] .active-dot::before {
+            background: #d97706;
+            box-shadow: 
+                0 0 10px #d97706,
+                0 0 20px rgba(217, 119, 6, 0.5),
+                0 0 30px rgba(217, 119, 6, 0.3);
+        }
+
+        [data-theme="light"] .completed-dot::before {
+            background: #4338ca;
+            box-shadow: 
+                0 0 10px #4338ca,
+                0 0 20px rgba(67, 56, 202, 0.5),
+                0 0 30px rgba(67, 56, 202, 0.3);
+        }
+
+        /* Filter Pulse Animations */
+        @keyframes filterPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes filterInnerGlow {
+            0% { 
+                opacity: 0.7;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.3);
+            }
+        }
+
+        @keyframes allPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 8px #10b981,
+                    0 0 16px rgba(16, 185, 129, 0.6),
+                    0 0 24px rgba(16, 185, 129, 0.3);
+                transform: translate(-50%, -50%) scale(0.9);
+                opacity: 0.7;
+            }
+            50% { 
+                box-shadow: 
+                    0 0 12px #10b981,
+                    0 0 24px rgba(16, 185, 129, 0.8),
+                    0 0 36px rgba(16, 185, 129, 0.5);
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes activePulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 8px #f59e0b,
+                    0 0 16px rgba(245, 158, 11, 0.6),
+                    0 0 24px rgba(245, 158, 11, 0.3);
+                transform: translate(-50%, -50%) scale(0.9);
+                opacity: 0.7;
+            }
+            50% { 
+                box-shadow: 
+                    0 0 12px #f59e0b,
+                    0 0 24px rgba(245, 158, 11, 0.8),
+                    0 0 36px rgba(245, 158, 11, 0.5);
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes completedPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 8px #6366f1,
+                    0 0 16px rgba(99, 102, 241, 0.6),
+                    0 0 24px rgba(99, 102, 241, 0.3);
+                transform: translate(-50%, -50%) scale(0.9);
+                opacity: 0.7;
+            }
+            50% { 
+                box-shadow: 
+                    0 0 12px #6366f1,
+                    0 0 24px rgba(99, 102, 241, 0.8),
+                    0 0 36px rgba(99, 102, 241, 0.5);
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0.4;
+            }
+        }
+
+        /* Active State Enhancements for Filter Buttons */
+        .filter-btn.active .filter-dot {
+            transform: scale(1.2);
+            box-shadow: 
+                0 0 8px currentColor,
+                0 0 16px currentColor,
+                0 0 24px currentColor;
+        }
+
+        .filter-btn.active .filter-dot::before {
+            animation-duration: 1s !important;
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+
+        .filter-btn.active .filter-dot::after {
+            animation: activeFilterInnerGlow 0.8s ease-in-out infinite alternate;
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+
+        @keyframes activeFilterInnerGlow {
+            0% { 
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.2);
+                box-shadow: 0 0 4px rgba(255, 255, 255, 0.9);
+            }
+            100% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(2);
+                box-shadow: 0 0 8px rgba(255, 255, 255, 1);
+            }
+        }
+
+        /* Hover Effects for Filter Buttons */
+        .filter-btn:hover .filter-dot {
+            transform: scale(1.1);
+        }
+
+        .filter-btn:hover .filter-dot::before {
+            animation-duration: 0.6s !important;
+        }
+
+        .filter-btn:hover .filter-dot::after {
+            animation: hoverFilterInnerGlow 0.4s ease-in-out infinite alternate;
+        }
+
+        @keyframes hoverFilterInnerGlow {
+            0% { 
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.6);
+            }
+        }
+
+        /* Category Filter Buttons - Professional Design */
+        .category-filters {
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            padding-left: var(--space-lg);
+            margin-left: var(--space-lg);
+        }
+
+        .category-filter {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-xs);
+            font-size: 12px;
+            padding: var(--space-xs) var(--space-md);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Extra Pulse Dots */
+        .extra-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            position: relative;
+            margin-left: 2px;
+            z-index: 5;
+        }
+
+        .extra-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: extraPulse 1.8s ease-in-out infinite;
+        }
+
+        .extra-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            transform: translate(-50%, -50%);
+            animation: extraInnerGlow 1.2s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        .category-filter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .category-filter:hover::before {
+            left: 100%;
+        }
+
+        .category-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px currentColor;
+            transition: all 0.3s ease;
+            position: relative;
+            animation: categoryPulse 2s ease-in-out infinite;
+            margin-left: var(--space-xs);
+            margin-right: 0;
+        }
+
+        .category-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            animation: innerGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        .category-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: currentColor;
+            transform: translate(-50%, -50%);
+            opacity: 0.3;
+            animation: outerRipple 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        /* Category Dot Colors with Custom Animations */
+        .do-first-dot {
+            background: #22c55e;
+            color: #22c55e;
+            animation: greenPulse 2.5s ease-in-out infinite;
+        }
+
+        .schedule-dot {
+            background: #3b82f6;
+            color: #3b82f6;
+            animation: bluePulse 2.2s ease-in-out infinite;
+        }
+
+        .delegate-dot {
+            background: #f97316;
+            color: #f97316;
+            animation: orangePulse 2.8s ease-in-out infinite;
+        }
+
+        .dont-do-dot {
+            background: #ef4444;
+            color: #ef4444;
+            animation: redPulse 2.4s ease-in-out infinite;
+        }
+
+        /* Keyframe Animations for Each Color */
+        @keyframes categoryPulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes innerGlow {
+            0% { 
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        @keyframes outerRipple {
+            0% { 
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.4;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0.2;
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        /* Custom Color-Specific Animations */
+        @keyframes greenPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 8px #22c55e,
+                    0 0 16px rgba(34, 197, 94, 0.4),
+                    0 0 24px rgba(34, 197, 94, 0.2);
+                filter: brightness(1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 12px #22c55e,
+                    0 0 24px rgba(34, 197, 94, 0.6),
+                    0 0 36px rgba(34, 197, 94, 0.4);
+                filter: brightness(1.2);
+            }
+        }
+
+        @keyframes bluePulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 8px #3b82f6,
+                    0 0 16px rgba(59, 130, 246, 0.4),
+                    0 0 24px rgba(59, 130, 246, 0.2);
+                filter: brightness(1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 12px #3b82f6,
+                    0 0 24px rgba(59, 130, 246, 0.6),
+                    0 0 36px rgba(59, 130, 246, 0.4);
+                filter: brightness(1.2);
+            }
+        }
+
+        @keyframes orangePulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 8px #f97316,
+                    0 0 16px rgba(249, 115, 22, 0.4),
+                    0 0 24px rgba(249, 115, 22, 0.2);
+                filter: brightness(1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 12px #f97316,
+                    0 0 24px rgba(249, 115, 22, 0.6),
+                    0 0 36px rgba(249, 115, 22, 0.4);
+                filter: brightness(1.2);
+            }
+        }
+
+        @keyframes redPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 8px #ef4444,
+                    0 0 16px rgba(239, 68, 68, 0.4),
+                    0 0 24px rgba(239, 68, 68, 0.2);
+                filter: brightness(1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 12px #ef4444,
+                    0 0 24px rgba(239, 68, 68, 0.6),
+                    0 0 36px rgba(239, 68, 68, 0.4);
+                filter: brightness(1.2);
+            }
+        }
+
+        /* Active Category Filter States */
+        .category-filter.active {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .category-filter.active .category-dot {
+            box-shadow: 
+                0 0 12px currentColor,
+                0 0 20px currentColor,
+                0 0 30px currentColor;
+            transform: scale(1.3);
+            animation-duration: 1s !important;
+        }
+
+        .category-filter.active .category-dot::after {
+            transform: translate(-50%, -50%) scale(1.5);
+            background: rgba(255, 255, 255, 1);
+            animation: fastInnerGlow 0.8s ease-in-out infinite alternate;
+        }
+
+        .category-filter.active .category-dot::before {
+            animation: fastOuterRipple 1.5s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        /* Fast animations for active state */
+        @keyframes fastInnerGlow {
+            0% { 
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.2);
+                box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+            }
+            100% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.8);
+                box-shadow: 0 0 8px rgba(255, 255, 255, 1);
+            }
+        }
+
+        @keyframes fastOuterRipple {
+            0% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0.3;
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced active state animations for each color */
+        .category-filter.active .do-first-dot {
+            animation: activeGreenPulse 1s ease-in-out infinite;
+        }
+
+        .category-filter.active .schedule-dot {
+            animation: activeBluePulse 1s ease-in-out infinite;
+        }
+
+        .category-filter.active .delegate-dot {
+            animation: activeOrangePulse 1s ease-in-out infinite;
+        }
+
+        .category-filter.active .dont-do-dot {
+            animation: activeRedPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes activeGreenPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 15px #22c55e,
+                    0 0 30px rgba(34, 197, 94, 0.8),
+                    0 0 45px rgba(34, 197, 94, 0.6);
+                filter: brightness(1.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 20px #22c55e,
+                    0 0 40px rgba(34, 197, 94, 1),
+                    0 0 60px rgba(34, 197, 94, 0.8);
+                filter: brightness(1.5);
+            }
+        }
+
+        @keyframes activeBluePulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 15px #3b82f6,
+                    0 0 30px rgba(59, 130, 246, 0.8),
+                    0 0 45px rgba(59, 130, 246, 0.6);
+                filter: brightness(1.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 20px #3b82f6,
+                    0 0 40px rgba(59, 130, 246, 1),
+                    0 0 60px rgba(59, 130, 246, 0.8);
+                filter: brightness(1.5);
+            }
+        }
+
+        @keyframes activeOrangePulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 15px #f97316,
+                    0 0 30px rgba(249, 115, 22, 0.8),
+                    0 0 45px rgba(249, 115, 22, 0.6);
+                filter: brightness(1.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 20px #f97316,
+                    0 0 40px rgba(249, 115, 22, 1),
+                    0 0 60px rgba(249, 115, 22, 0.8);
+                filter: brightness(1.5);
+            }
+        }
+
+        @keyframes activeRedPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 15px #ef4444,
+                    0 0 30px rgba(239, 68, 68, 0.8),
+                    0 0 45px rgba(239, 68, 68, 0.6);
+                filter: brightness(1.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 20px #ef4444,
+                    0 0 40px rgba(239, 68, 68, 1),
+                    0 0 60px rgba(239, 68, 68, 0.8);
+                filter: brightness(1.5);
+            }
+        }
+
+        /* Specific Active States for Each Category */
+        .category-filter[data-category="do-first"].active {
+            background: rgba(34, 197, 94, 0.12);
+            border-color: rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+            text-shadow: 0 0 4px rgba(34, 197, 94, 0.4);
+        }
+
+        .category-filter[data-category="schedule"].active {
+            background: rgba(59, 130, 246, 0.12);
+            border-color: rgba(59, 130, 246, 0.3);
+            color: #3b82f6;
+            text-shadow: 0 0 4px rgba(59, 130, 246, 0.4);
+        }
+
+        .category-filter[data-category="delegate"].active {
+            background: rgba(249, 115, 22, 0.12);
+            border-color: rgba(249, 115, 22, 0.3);
+            color: #f97316;
+            text-shadow: 0 0 4px rgba(249, 115, 22, 0.4);
+        }
+
+        .category-filter[data-category="dont-do"].active {
+            background: rgba(239, 68, 68, 0.12);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            text-shadow: 0 0 4px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Hover Effects for Category Filters */
+        .category-filter:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .category-filter:hover .category-dot {
+            transform: scale(1.2);
+            box-shadow: 
+                0 0 10px currentColor,
+                0 0 15px currentColor,
+                0 0 25px currentColor;
+            animation-duration: 0.5s !important;
+        }
+
+        .category-filter:hover .category-dot::after {
+            animation: hoverInnerGlow 0.3s ease-in-out infinite alternate;
+            transform: translate(-50%, -50%) scale(1.4);
+        }
+
+        .category-filter:hover .category-dot::before {
+            animation: hoverOuterRipple 1s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        /* Hover specific animations */
+        @keyframes hoverInnerGlow {
+            0% { 
+                opacity: 0.7;
+                box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+            }
+            100% { 
+                opacity: 1;
+                box-shadow: 0 0 12px rgba(255, 255, 255, 1);
+            }
+        }
+
+        @keyframes hoverOuterRipple {
+            0% { 
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.8);
+                opacity: 0.4;
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(2.2);
+                opacity: 0;
+            }
+        }
+
+        /* Light Theme Category Filters */
+        [data-theme="light"] .category-filters {
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] .category-filter.active {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 
+                0 8px 25px rgba(31, 38, 135, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        [data-theme="light"] .category-filter:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.7);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Light theme specific category active states */
+        [data-theme="light"] .category-filter[data-category="do-first"].active {
+            background: rgba(34, 197, 94, 0.08);
+            border-color: rgba(34, 197, 94, 0.25);
+            color: #16a34a;
+        }
+
+        [data-theme="light"] .category-filter[data-category="schedule"].active {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: rgba(59, 130, 246, 0.25);
+            color: #2563eb;
+        }
+
+        [data-theme="light"] .category-filter[data-category="delegate"].active {
+            background: rgba(249, 115, 22, 0.08);
+            border-color: rgba(249, 115, 22, 0.25);
+            color: #ea580c;
+        }
+
+        [data-theme="light"] .category-filter[data-category="dont-do"].active {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: rgba(239, 68, 68, 0.25);
+            color: #dc2626;
+        }
+
+        /* Light theme pulse adjustments */
+        [data-theme="light"] .category-dot {
+            box-shadow: 
+                0 0 6px currentColor,
+                0 0 12px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] .category-filter.active .category-dot {
+            box-shadow: 
+                0 0 10px currentColor,
+                0 0 20px currentColor,
+                0 0 30px rgba(0, 0, 0, 0.15);
+        }
+
+        [data-theme="light"] .category-filter:hover .category-dot {
+            box-shadow: 
+                0 0 8px currentColor,
+                0 0 16px currentColor,
+                0 0 24px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Reduced glow intensity for light theme */
+        @keyframes lightGreenPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 6px #16a34a,
+                    0 0 12px rgba(22, 163, 74, 0.3),
+                    0 0 18px rgba(22, 163, 74, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 8px #16a34a,
+                    0 0 16px rgba(22, 163, 74, 0.4),
+                    0 0 24px rgba(22, 163, 74, 0.2);
+            }
+        }
+
+        [data-theme="light"] .do-first-dot {
+            animation: lightGreenPulse 2.5s ease-in-out infinite;
+        }
+
+        [data-theme="light"] .schedule-dot {
+            animation: lightBluePulse 2.2s ease-in-out infinite;
+        }
+
+        [data-theme="light"] .delegate-dot {
+            animation: lightOrangePulse 2.8s ease-in-out infinite;
+        }
+
+        [data-theme="light"] .dont-do-dot {
+            animation: lightRedPulse 2.4s ease-in-out infinite;
+        }
+
+        /* Light theme extra dots */
+        [data-theme="light"] .extra-dot::before {
+            box-shadow: 
+                0 0 4px currentColor,
+                0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] .red-pulse-dot::before {
+            background: #dc2626;
+            box-shadow: 
+                0 0 6px #dc2626,
+                0 0 12px rgba(220, 38, 38, 0.4);
+        }
+
+        [data-theme="light"] .purple-pulse-dot::before {
+            background: #7c3aed;
+            box-shadow: 
+                0 0 6px #7c3aed,
+                0 0 12px rgba(124, 58, 237, 0.4);
+        }
+
+        [data-theme="light"] .yellow-pulse-dot::before {
+            background: #ca8a04;
+            box-shadow: 
+                0 0 6px #ca8a04,
+                0 0 12px rgba(202, 138, 4, 0.4);
+        }
+
+        [data-theme="light"] .cyan-pulse-dot::before {
+            background: #0891b2;
+            box-shadow: 
+                0 0 6px #0891b2,
+                0 0 12px rgba(8, 145, 178, 0.4);
+        }
+
+        @keyframes lightBluePulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 6px #2563eb,
+                    0 0 12px rgba(37, 99, 235, 0.3),
+                    0 0 18px rgba(37, 99, 235, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 8px #2563eb,
+                    0 0 16px rgba(37, 99, 235, 0.4),
+                    0 0 24px rgba(37, 99, 235, 0.2);
+            }
+        }
+
+        @keyframes lightOrangePulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 6px #ea580c,
+                    0 0 12px rgba(234, 88, 12, 0.3),
+                    0 0 18px rgba(234, 88, 12, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 8px #ea580c,
+                    0 0 16px rgba(234, 88, 12, 0.4),
+                    0 0 24px rgba(234, 88, 12, 0.2);
+            }
+        }
+
+        @keyframes lightRedPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 6px #dc2626,
+                    0 0 12px rgba(220, 38, 38, 0.3),
+                    0 0 18px rgba(220, 38, 38, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 8px #dc2626,
+                    0 0 16px rgba(220, 38, 38, 0.4),
+                    0 0 24px rgba(220, 38, 38, 0.2);
+            }
+        }
+
+        /* Extra Dot Colors and Animations */
+        .red-pulse-dot {
+            background: #ef4444;
+        }
+
+        .red-pulse-dot::before {
+            background: #ef4444;
+            box-shadow: 
+                0 0 8px #ef4444,
+                0 0 16px rgba(239, 68, 68, 0.6),
+                0 0 24px rgba(239, 68, 68, 0.3);
+        }
+
+        .red-pulse-dot {
+            background: #ef4444;
+            box-shadow: 0 0 4px rgba(239, 68, 68, 0.8);
+        }
+
+        .purple-pulse-dot {
+            background: #8b5cf6;
+        }
+
+        .purple-pulse-dot {
+            background: #8b5cf6;
+            box-shadow: 0 0 4px rgba(139, 92, 246, 0.8);
+        }
+
+        .purple-pulse-dot::before {
+            background: #8b5cf6;
+            box-shadow: 
+                0 0 8px #8b5cf6,
+                0 0 16px rgba(139, 92, 246, 0.6),
+                0 0 24px rgba(139, 92, 246, 0.3);
+        }
+
+        .yellow-pulse-dot {
+            background: #eab308;
+            box-shadow: 0 0 4px rgba(234, 179, 8, 0.8);
+        }
+
+        .yellow-pulse-dot::before {
+            background: #eab308;
+            box-shadow: 
+                0 0 8px #eab308,
+                0 0 16px rgba(234, 179, 8, 0.6),
+                0 0 24px rgba(234, 179, 8, 0.3);
+        }
+
+        .cyan-pulse-dot {
+            background: #06b6d4;
+            box-shadow: 0 0 4px rgba(6, 182, 212, 0.8);
+        }
+
+        .cyan-pulse-dot::before {
+            background: #06b6d4;
+            box-shadow: 
+                0 0 8px #06b6d4,
+                0 0 16px rgba(6, 182, 212, 0.6),
+                0 0 24px rgba(6, 182, 212, 0.3);
+        }
+
+        /* Extra Dot Animations - Synchronized with delay */
+        .red-pulse-dot::before {
+            animation: extraPulse 1.8s ease-in-out infinite;
+            animation-delay: 0.2s;
+        }
+
+        .purple-pulse-dot::before {
+            animation: extraPulse 1.8s ease-in-out infinite;
+            animation-delay: 0.4s;
+        }
+
+        .yellow-pulse-dot::before {
+            animation: extraPulse 1.8s ease-in-out infinite;
+            animation-delay: 0.6s;
+        }
+
+        .cyan-pulse-dot::before {
+            animation: extraPulse 1.8s ease-in-out infinite;
+            animation-delay: 0.8s;
+        }
+
+        @keyframes extraPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.4);
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes extraInnerGlow {
+            0% { 
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            100% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+        }
+
+        /* Active state for extra dots */
+        .category-filter.active .extra-dot::before {
+            animation: fastExtraPulse 0.8s ease-in-out infinite;
+        }
+
+        .category-filter.active .extra-dot::after {
+            animation: fastExtraInnerGlow 0.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes fastExtraPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.8);
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes fastExtraInnerGlow {
+            0% { 
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(2);
+            }
+        }
+
+        /* Hover effects for extra dots */
+        .category-filter:hover .extra-dot::before {
+            animation: hoverExtraPulse 0.5s ease-in-out infinite;
+        }
+
+        @keyframes hoverExtraPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.9;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.6);
+                opacity: 0.5;
+            }
         }
 
         .task {
@@ -2480,14 +3549,121 @@
             }
 
             .filters {
-                flex-direction: row;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                gap: var(--space-md);
             }
 
             .filter-group {
                 justify-content: center;
                 align-items: center;
+                width: 100%;
+            }
+
+            .category-filters {
+                border-left: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding-left: 0;
+                padding-top: var(--space-md);
+                margin-left: 0;
+                margin-top: var(--space-md);
+                width: 100%;
+                justify-content: center;
+            }
+
+            /* تحسينات النقاط للهواتف */
+            .filter-dot {
+                width: 10px;
+                height: 10px;
+                margin-right: 6px;
+            }
+
+            .filter-dot::before {
+                width: 16px;
+                height: 16px;
+            }
+
+            .filter-dot::after {
+                width: 4px;
+                height: 4px;
+            }
+
+            .filter-btn {
+                min-height: 44px;
+                font-size: 14px;
+                padding: 12px 16px;
+            }
+
+            .filter-btn.active .filter-dot {
+                transform: scale(1.3);
+            }
+
+            .filter-btn:hover .filter-dot {
+                transform: scale(1.2);
+            }
+
+            /* تقليل شدة الأنيميشن للهواتف */
+            .filter-dot::before {
+                animation-duration: 3s !important;
+            }
+
+            .filter-dot::after {
+                animation-duration: 2.5s !important;
+                flex-wrap: wrap;
+                gap: var(--space-xs);
+            }
+
+            .category-filter {
+                font-size: 11px;
+                padding: var(--space-xs) var(--space-sm);
+                min-width: auto;
+                flex: none;
+            }
+
+            .category-dot {
+                width: 6px;
+                height: 6px;
+            }
+
+            .category-dot::before {
+                width: 10px;
+                height: 10px;
+            }
+
+            /* Reduced animation intensity on mobile */
+            .category-filter .category-dot {
+                animation-duration: 3s;
+            }
+
+            .category-filter.active .category-dot {
+                animation-duration: 1.5s !important;
+            }
+
+            /* Extra dots mobile adjustments */
+            .extra-dot {
+                width: 5px;
+                height: 5px;
+                margin-left: 1px;
+            }
+
+            .extra-dot::after {
+                width: 1.5px;
+                height: 1.5px;
+            }
+
+            /* Reduced animation intensity for mobile */
+            .extra-dot::before {
+                animation-duration: 2.2s;
+            }
+
+            .category-filter.active .extra-dot::before {
+                animation-duration: 1s;
+            }
+
+            [data-theme="light"] .category-filters {
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+                border-left: none;
             }
 
             .task {
@@ -2610,9 +3786,36 @@
 
         <div class="filters">
             <div class="filter-group">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="active">Active</button>
-                <button class="filter-btn" data-filter="completed">Completed</button>
+                <button class="filter-btn active" data-filter="all">
+                    <span class="filter-dot all-dot"></span>
+                    All
+                </button>
+                <button class="filter-btn" data-filter="active">
+                    <span class="filter-dot active-dot"></span>
+                    Active
+                </button>
+                <button class="filter-btn" data-filter="completed">
+                    <span class="filter-dot completed-dot"></span>
+                    Completed
+                </button>
+            </div>
+            <div class="filter-group category-filters">
+                <button class="filter-btn category-filter" data-category="do-first" title="Filter Do First tasks">
+                    Do First
+                    <span class="category-dot do-first-dot"></span>
+                </button>
+                <button class="filter-btn category-filter" data-category="schedule" title="Filter Schedule tasks">
+                    Schedule
+                    <span class="category-dot schedule-dot"></span>
+                </button>
+                <button class="filter-btn category-filter" data-category="delegate" title="Filter Delegate tasks">
+                    Delegate
+                    <span class="category-dot delegate-dot"></span>
+                </button>
+                <button class="filter-btn category-filter" data-category="dont-do" title="Filter Don't Do tasks">
+                    Don't Do
+                    <span class="category-dot dont-do-dot"></span>
+                </button>
             </div>
             <button class="filter-btn" id="sortBtn">
                 <i class="fas fa-sort"></i> Sort
@@ -2648,13 +3851,15 @@
             const quoteElement = document.getElementById('motivationalQuote');
             const emptyState = document.getElementById('emptyState');
             const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
+            const categoryFilterButtons = document.querySelectorAll('.category-filter[data-category]');
             const sortButton = document.getElementById('sortBtn');
 
             let currentFilter = 'all';
+            let currentCategoryFilter = null;
             let sortDirection = 'desc';
             let draggedTask = null;
             let customOrder = false;
-            let currentQuoteIndex = 0; // متغير لتتبع الاقتباس الحالي
+            let lastQuoteIndex = -1; // متغير لتجنب تكرار نفس الاقتباس مباشرة
 
             const quotes = [
                 {
@@ -2751,8 +3956,13 @@
             ];
 
             function updateQuote() {
-                // استخدام الاقتباس الحالي حسب الترتيب
-                const currentQuote = quotes[currentQuoteIndex];
+                // اختيار اقتباس عشوائي مع تجنب تكرار الاقتباس الأخير
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * quotes.length);
+                } while (randomIndex === lastQuoteIndex && quotes.length > 1);
+                
+                const currentQuote = quotes[randomIndex];
                 const quoteTextElement = document.getElementById('quoteText');
                 const quoteAuthorElement = document.getElementById('quoteAuthor');
                 
@@ -2764,8 +3974,8 @@
                     quoteTextElement.innerHTML = arabicText + englishText;
                     quoteAuthorElement.textContent = `— ${currentQuote.author}`;
                     
-                    // الانتقال للاقتباس التالي
-                    currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+                    // حفظ فهرس الاقتباس الحالي لتجنب تكراره في المرة القادمة
+                    lastQuoteIndex = randomIndex;
                 }
             }
 
@@ -2776,8 +3986,8 @@
                 // تعيين مؤقت لتحديث الاقتباس كل 5 دقائق (300,000 ميلي ثانية)
                 setInterval(updateQuote, 300000);
                 
-                // إضافة مؤشر لعرض الاقتباس الحالي (اختياري)
-                console.log(`تم بدء دورة الاقتباسات - سيتم تغيير الاقتباس كل 5 دقائق`);
+                // إضافة مؤشر لعرض الاقتباسات العشوائية (اختياري)
+                console.log(`تم بدء دورة الاقتباسات العشوائية - سيتم تغيير الاقتباس كل 5 دقائق`);
                 console.log(`إجمالي عدد الاقتباسات: ${quotes.length}`);
             }
 
@@ -2804,7 +4014,8 @@
                 
                 updateStats();
                 updateEmptyState();
-                applyFilter(currentFilter);
+                updateFilterStats();
+                applyFilter(currentFilter, currentCategoryFilter);
             }
 
             function sortTasks(tasks) {
@@ -2842,9 +4053,10 @@
                     addTaskToDOM(task);
                     updateStats();
                     updateEmptyState();
+                    updateFilterStats();
                     taskInput.value = '';
                     categorySelect.value = 'do-first'; // Reset to default
-                    applyFilter(currentFilter);
+                    applyFilter(currentFilter, currentCategoryFilter);
                 }
             }
 
@@ -3079,7 +4291,8 @@
                     }
                     
                     updateStats();
-                    applyFilter(currentFilter);
+                    updateFilterStats();
+                    applyFilter(currentFilter, currentCategoryFilter);
                 }
             }
 
@@ -3156,6 +4369,8 @@
                         }
                         
                         updateStats();
+                        updateFilterStats();
+                        applyFilter(currentFilter, currentCategoryFilter);
                     }
                 }
             }
@@ -3173,6 +4388,7 @@
                     
                     updateStats();
                     updateEmptyState();
+                    updateFilterStats();
                 }
             }
 
@@ -3208,27 +4424,86 @@
 
 
 
-            function applyFilter(filter) {
-                currentFilter = filter;
+            function applyFilter(filter, categoryFilter = null) {
+                if (filter !== undefined) {
+                    currentFilter = filter;
+                }
+                if (categoryFilter !== undefined) {
+                    currentCategoryFilter = categoryFilter;
+                }
+                
                 const tasks = document.querySelectorAll('.task');
                 
                 tasks.forEach(task => {
                     const isCompleted = task.classList.contains('completed');
+                    let showTask = true;
                     
-                    if (filter === 'all' ||
-                        (filter === 'active' && !isCompleted) ||
-                        (filter === 'completed' && isCompleted)) {
-                        task.style.display = '';
-                    } else {
-                        task.style.display = 'none';
+                    // Apply status filter (all/active/completed)
+                    if (currentFilter === 'active' && isCompleted) {
+                        showTask = false;
+                    } else if (currentFilter === 'completed' && !isCompleted) {
+                        showTask = false;
                     }
+                    
+                    // Apply category filter
+                    if (currentCategoryFilter && showTask) {
+                        const taskCategory = getTaskCategory(task);
+                        if (taskCategory !== currentCategoryFilter) {
+                            showTask = false;
+                        }
+                    }
+                    
+                    task.style.display = showTask ? '' : 'none';
                 });
 
+                // Update active filter buttons
                 filterButtons.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.filter === filter);
+                    btn.classList.toggle('active', btn.dataset.filter === currentFilter);
+                });
+                
+                // Update active category filter buttons
+                categoryFilterButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.category === currentCategoryFilter);
                 });
                 
                 updateEmptyState();
+                updateFilterStats();
+            }
+
+            function getTaskCategory(taskElement) {
+                const classList = Array.from(taskElement.classList);
+                const categoryClasses = ['do-first', 'schedule', 'delegate', 'dont-do'];
+                return categoryClasses.find(cat => classList.includes(cat)) || 'do-first';
+            }
+
+            function updateFilterStats() {
+                const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                const visibleTasks = document.querySelectorAll('.task[style=""], .task:not([style])');
+                
+                // Update filter button text with counts
+                filterButtons.forEach(btn => {
+                    const filter = btn.dataset.filter;
+                    let count = 0;
+                    
+                    if (filter === 'all') {
+                        count = tasks.length;
+                    } else if (filter === 'active') {
+                        count = tasks.filter(t => !t.completed).length;
+                    } else if (filter === 'completed') {
+                        count = tasks.filter(t => t.completed).length;
+                    }
+                    
+                    const originalText = btn.textContent.split(' (')[0];
+                    btn.textContent = `${originalText} (${count})`;
+                });
+                
+                // Update category filter button text with counts
+                categoryFilterButtons.forEach(btn => {
+                    const category = btn.dataset.category;
+                    const count = tasks.filter(t => (t.category || 'do-first') === category).length;
+                    const originalText = btn.textContent.split(' (')[0];
+                    btn.textContent = `${originalText} (${count})`;
+                });
             }
 
             function toggleSort() {
@@ -3275,7 +4550,24 @@
 
             filterButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
+                    // Reset category filter when changing status filter
+                    if (currentCategoryFilter) {
+                        currentCategoryFilter = null;
+                    }
                     applyFilter(btn.dataset.filter);
+                });
+            });
+
+            categoryFilterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const category = btn.dataset.category;
+                    // Toggle category filter
+                    if (currentCategoryFilter === category) {
+                        currentCategoryFilter = null;
+                    } else {
+                        currentCategoryFilter = category;
+                    }
+                    applyFilter(undefined, currentCategoryFilter);
                 });
             });
 
