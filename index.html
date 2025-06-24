@@ -4052,6 +4052,237 @@
                 gap: var(--space-xs);
             }
         }
+
+        /* Alarm Modal Styles */
+        .alarm-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: alarmModalFadeIn 0.3s ease-out;
+        }
+
+        .alarm-modal-content {
+            background: var(--bg-card);
+            border: 2px solid var(--danger);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow-xl), 0 0 30px rgba(239, 68, 68, 0.5);
+            animation: alarmModalSlideIn 0.3s ease-out, alarmPulse 2s infinite;
+        }
+
+        .alarm-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-lg);
+            animation: alarmShake 0.5s infinite;
+        }
+
+        .alarm-modal h2 {
+            color: var(--danger);
+            margin-bottom: var(--space-lg);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .alarm-task-text {
+            background: var(--bg-dark);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+            border: 1px solid var(--hologram-border);
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .alarm-time {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: var(--space-xl);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .alarm-actions {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .alarm-btn {
+            padding: var(--space-md) var(--space-lg);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: inherit;
+        }
+
+        .snooze-btn {
+            background: var(--warning);
+            color: var(--bg-dark);
+        }
+
+        .snooze-btn:hover {
+            background: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stop-btn {
+            background: var(--danger);
+            color: white;
+        }
+
+        .stop-btn:hover {
+            background: var(--danger-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .complete-btn {
+            background: var(--success);
+            color: var(--bg-dark);
+        }
+
+        .complete-btn:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Alarm Animations */
+        @keyframes alarmModalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes alarmModalSlideIn {
+            from {
+                transform: scale(0.7) translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes alarmPulse {
+            0%, 100% {
+                box-shadow: var(--shadow-xl), 0 0 30px rgba(239, 68, 68, 0.5);
+            }
+            50% {
+                box-shadow: var(--shadow-xl), 0 0 50px rgba(239, 68, 68, 0.8);
+            }
+        }
+
+        @keyframes alarmShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px) rotate(-5deg); }
+            75% { transform: translateX(5px) rotate(5deg); }
+        }
+
+        /* Body alarm state */
+        body.alarm-active {
+            animation: bodyAlarmFlash 0.5s infinite;
+        }
+
+        @keyframes bodyAlarmFlash {
+            0%, 100% { background-color: var(--bg-dark); }
+            50% { background-color: rgba(239, 68, 68, 0.1); }
+        }
+
+        /* Mobile responsive for alarm modal */
+        @media (max-width: 768px) {
+            .alarm-modal-content {
+                padding: var(--space-xl);
+                margin: var(--space-lg);
+            }
+
+            .alarm-actions {
+                flex-direction: column;
+            }
+
+            .alarm-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .alarm-icon {
+                font-size: 3rem;
+            }
+        }
+
+        /* Toast Notification Styles */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--hologram-border);
+            z-index: 10001;
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            max-width: 300px;
+        }
+
+        .toast-show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .toast-content {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .toast-success {
+            border-left: 4px solid var(--success);
+        }
+
+        .toast-error {
+            border-left: 4px solid var(--danger);
+        }
+
+        .toast-info {
+            border-left: 4px solid var(--info);
+        }
+
+        @media (max-width: 768px) {
+            .toast {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                transform: translateY(-100px);
+            }
+
+            .toast-show {
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body data-theme="dark">
@@ -5045,9 +5276,241 @@
                 }
             }
 
+            // Alarm sounds and configurations
+            const alarmSounds = {
+                classic: {
+                    name: 'Classic Bell',
+                    freq1: 800,
+                    freq2: 1000,
+                    duration: 200,
+                    repeat: 3
+                },
+                urgent: {
+                    name: 'Urgent Alert',
+                    freq1: 1200,
+                    freq2: 800,
+                    duration: 150,
+                    repeat: 5
+                },
+                gentle: {
+                    name: 'Gentle Chime',
+                    freq1: 523,
+                    freq2: 659,
+                    duration: 300,
+                    repeat: 2
+                },
+                digital: {
+                    name: 'Digital Beep',
+                    freq1: 1000,
+                    freq2: 1000,
+                    duration: 100,
+                    repeat: 4
+                }
+            };
+
+            let currentAlarmAudio = null;
+            let alarmInterval = null;
+
+            function playAlarmSound(soundType = 'classic') {
+                try {
+                    // Stop any existing alarm
+                    stopAlarm();
+                    
+                    const sound = alarmSounds[soundType] || alarmSounds.classic;
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    let repeatCount = 0;
+
+                    function createBeep() {
+                        if (repeatCount >= sound.repeat) {
+                            return;
+                        }
+
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+                        
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+                        
+                        oscillator.frequency.value = sound.freq1;
+                        gainNode.gain.value = 0.3;
+                        
+                        // Create envelope
+                        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                        gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + sound.duration / 1000);
+                        
+                        oscillator.start(audioContext.currentTime);
+                        oscillator.stop(audioContext.currentTime + sound.duration / 1000);
+                        
+                        // Second tone for some alarm types
+                        if (sound.freq2 !== sound.freq1) {
+                            setTimeout(() => {
+                                const oscillator2 = audioContext.createOscillator();
+                                const gainNode2 = audioContext.createGain();
+                                
+                                oscillator2.connect(gainNode2);
+                                gainNode2.connect(audioContext.destination);
+                                
+                                oscillator2.frequency.value = sound.freq2;
+                                gainNode2.gain.value = 0.3;
+                                
+                                gainNode2.gain.setValueAtTime(0, audioContext.currentTime);
+                                gainNode2.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
+                                gainNode2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + sound.duration / 1000);
+                                
+                                oscillator2.start(audioContext.currentTime);
+                                oscillator2.stop(audioContext.currentTime + sound.duration / 1000);
+                            }, sound.duration / 2);
+                        }
+                        
+                        repeatCount++;
+                        
+                        // Schedule next beep
+                        if (repeatCount < sound.repeat) {
+                            setTimeout(createBeep, sound.duration * 2);
+                        }
+                    }
+                    
+                    createBeep();
+                    
+                } catch (error) {
+                    console.log('🔇 Audio not available, using visual alarm only');
+                    showVisualAlarm();
+                }
+            }
+
+            function stopAlarm() {
+                if (currentAlarmAudio) {
+                    currentAlarmAudio.pause();
+                    currentAlarmAudio.currentTime = 0;
+                    currentAlarmAudio = null;
+                }
+                if (alarmInterval) {
+                    clearInterval(alarmInterval);
+                    alarmInterval = null;
+                }
+                
+                // Remove visual alarm effects
+                document.body.classList.remove('alarm-active');
+            }
+
+            function showVisualAlarm() {
+                document.body.classList.add('alarm-active');
+                
+                // Flash effect
+                let flashCount = 0;
+                const flashInterval = setInterval(() => {
+                    document.body.style.backgroundColor = flashCount % 2 === 0 ? 'rgba(239, 68, 68, 0.1)' : '';
+                    flashCount++;
+                    
+                    if (flashCount >= 6) {
+                        clearInterval(flashInterval);
+                        document.body.style.backgroundColor = '';
+                        document.body.classList.remove('alarm-active');
+                    }
+                }, 300);
+            }
+
+            function showAlarmModal(task) {
+                // Create alarm modal
+                const modal = document.createElement('div');
+                modal.className = 'alarm-modal';
+                modal.innerHTML = `
+                    <div class="alarm-modal-content">
+                        <div class="alarm-icon">🚨</div>
+                        <h2>⏰ Task Reminder</h2>
+                        <p class="alarm-task-text">${task.text}</p>
+                        <div class="alarm-time">${new Date().toLocaleTimeString('en-US')}</div>
+                        <div class="alarm-actions">
+                            <button class="alarm-btn snooze-btn" onclick="snoozeAlarm('${task.id}')">
+                                <i class="fas fa-clock"></i> Snooze 5 min
+                            </button>
+                            <button class="alarm-btn stop-btn" onclick="stopTaskAlarm('${task.id}')">
+                                <i class="fas fa-stop"></i> Stop
+                            </button>
+                            <button class="alarm-btn complete-btn" onclick="completeTaskFromAlarm('${task.id}')">
+                                <i class="fas fa-check"></i> Complete
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Auto-remove modal after 30 seconds
+                setTimeout(() => {
+                    if (modal.parentNode) {
+                        modal.parentNode.removeChild(modal);
+                        stopAlarm();
+                    }
+                }, 30000);
+                
+                return modal;
+            }
+
+            function snoozeAlarm(taskId) {
+                const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                const task = tasks.find(t => t.id === taskId);
+                
+                if (task && task.reminder) {
+                    // Add 5 minutes to reminder
+                    const newReminderTime = new Date(task.reminder.datetime);
+                    newReminderTime.setMinutes(newReminderTime.getMinutes() + 5);
+                    
+                    task.reminder.datetime = newReminderTime.toISOString();
+                    task.reminder.notified = false;
+                    
+                    localStorage.setItem('tasks', JSON.stringify(tasks));
+                    
+                    // Remove modal and stop alarm
+                    const modal = document.querySelector('.alarm-modal');
+                    if (modal) modal.remove();
+                    stopAlarm();
+                    
+                    showToast('Reminder snoozed for 5 minutes', 'info');
+                }
+            }
+
+            function stopTaskAlarm(taskId) {
+                const modal = document.querySelector('.alarm-modal');
+                if (modal) modal.remove();
+                stopAlarm();
+                
+                showToast('Alarm stopped', 'success');
+            }
+
+            function completeTaskFromAlarm(taskId) {
+                // Mark task as completed
+                const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                const task = tasks.find(t => t.id === taskId);
+                
+                if (task) {
+                    task.completed = true;
+                    task.completedAt = new Date().toISOString();
+                    
+                    localStorage.setItem('tasks', JSON.stringify(tasks));
+                    loadTasks();
+                    
+                    const modal = document.querySelector('.alarm-modal');
+                    if (modal) modal.remove();
+                    stopAlarm();
+                    
+                    showToast('Task completed!', 'success');
+                }
+            }
+
             function showNotification(task) {
+                // Play alarm sound
+                playAlarmSound('urgent');
+                
+                // Show visual alarm
+                showVisualAlarm();
+                
+                // Show alarm modal
+                showAlarmModal(task);
+                
                 if ('Notification' in window && Notification.permission === 'granted') {
-                    const notification = new Notification('📋 Task Reminder', {
+                    const notification = new Notification('🚨 Urgent Task Reminder', {
                         body: `${task.text}`,
                         icon: 'icons/icon48.png',
                         badge: 'icons/icon16.png',
@@ -5070,14 +5533,39 @@
                         }
                     };
                     
-                    // Auto-close after 10 seconds
+                    // Auto-close notification after 15 seconds
                     setTimeout(() => {
                         notification.close();
-                    }, 10000);
+                    }, 15000);
                 }
                 
-                // Also show browser alert as fallback
-                console.log(`🔔 Task Reminder: ${task.text}`);
+                console.log(`🚨 Task Alarm: ${task.text}`);
+            }
+
+            function showToast(message, type = 'info') {
+                const toast = document.createElement('div');
+                toast.className = `toast toast-${type}`;
+                toast.innerHTML = `
+                    <div class="toast-content">
+                        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+                
+                document.body.appendChild(toast);
+                
+                // Show toast
+                setTimeout(() => toast.classList.add('toast-show'), 100);
+                
+                // Hide and remove toast
+                setTimeout(() => {
+                    toast.classList.remove('toast-show');
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.parentNode.removeChild(toast);
+                        }
+                    }, 300);
+                }, 3000);
             }
 
             function startReminderChecker() {
