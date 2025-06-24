@@ -3549,50 +3549,78 @@
             }
 
             .filters {
+                display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: var(--space-md);
+                gap: var(--space-sm);
+                padding: var(--space-sm);
+                width: 100%;
             }
 
             .filter-group {
+                display: flex;
                 justify-content: center;
                 align-items: center;
+                flex-wrap: nowrap;
+                gap: var(--space-sm);
                 width: 100%;
             }
 
             .category-filters {
+                display: flex;
                 border-left: none;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                border-top: none;
                 padding-left: 0;
-                padding-top: var(--space-md);
+                padding-top: 0;
                 margin-left: 0;
-                margin-top: var(--space-md);
-                width: 100%;
+                margin-top: 0;
                 justify-content: center;
+                flex-wrap: nowrap;
+                gap: 6px;
+                width: 100%;
             }
 
             /* تحسينات النقاط للهواتف */
             .filter-dot {
-                width: 10px;
-                height: 10px;
-                margin-right: 6px;
+                width: 8px;
+                height: 8px;
+                margin-right: 4px;
             }
 
             .filter-dot::before {
-                width: 16px;
-                height: 16px;
+                width: 12px;
+                height: 12px;
             }
 
             .filter-dot::after {
-                width: 4px;
-                height: 4px;
+                width: 3px;
+                height: 3px;
             }
 
             .filter-btn {
-                min-height: 44px;
-                font-size: 14px;
-                padding: 12px 16px;
+                min-height: 40px;
+                font-size: 13px;
+                padding: 8px 14px;
+                border-radius: 20px;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                white-space: nowrap;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                flex: 1;
+                justify-content: center;
+                max-width: 120px;
+            }
+
+            .filter-btn.active {
+                background: rgba(92, 186, 143, 0.12);
+                border-color: rgba(92, 186, 143, 0.25);
+                color: var(--matrix-green);
+                transform: scale(1.02);
             }
 
             .filter-btn.active .filter-dot {
@@ -3601,6 +3629,12 @@
 
             .filter-btn:hover .filter-dot {
                 transform: scale(1.2);
+            }
+
+            .category-filter.active {
+                background: rgba(255, 255, 255, 0.12);
+                border-color: rgba(255, 255, 255, 0.2);
+                transform: scale(1.05);
             }
 
             /* تقليل شدة الأنيميشن للهواتف */
@@ -3616,19 +3650,31 @@
 
             .category-filter {
                 font-size: 11px;
-                padding: var(--space-xs) var(--space-sm);
+                padding: 5px 6px;
                 min-width: auto;
                 flex: none;
+                border-radius: 14px;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                background: rgba(255, 255, 255, 0.06);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                white-space: nowrap;
+                display: flex;
+                align-items: center;
+                gap: 2px;
+                transition: all 0.3s ease;
+                flex-shrink: 0;
+                height: 32px;
             }
 
             .category-dot {
-                width: 6px;
-                height: 6px;
+                width: 5px;
+                height: 5px;
             }
 
             .category-dot::before {
-                width: 10px;
-                height: 10px;
+                width: 8px;
+                height: 8px;
             }
 
             /* Reduced animation intensity on mobile */
@@ -3662,8 +3708,30 @@
             }
 
             [data-theme="light"] .category-filters {
-                border-top: 1px solid rgba(0, 0, 0, 0.1);
+                border-top: none;
                 border-left: none;
+            }
+
+            [data-theme="light"] .filter-btn {
+                background: rgba(255, 255, 255, 0.7);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                color: var(--text-primary);
+            }
+
+            [data-theme="light"] .filter-btn.active {
+                background: rgba(61, 138, 104, 0.15);
+                border-color: rgba(61, 138, 104, 0.3);
+                color: #16a34a;
+            }
+
+            [data-theme="light"] .category-filter {
+                background: rgba(255, 255, 255, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+            }
+
+            [data-theme="light"] .category-filter.active {
+                background: rgba(255, 255, 255, 0.9);
+                border-color: rgba(255, 255, 255, 0.6);
             }
 
             .task {
@@ -3801,19 +3869,19 @@
             </div>
             <div class="filter-group category-filters">
                 <button class="filter-btn category-filter" data-category="do-first" title="Filter Do First tasks">
-                    Do First
+                    🟢 Do First
                     <span class="category-dot do-first-dot"></span>
                 </button>
                 <button class="filter-btn category-filter" data-category="schedule" title="Filter Schedule tasks">
-                    Schedule
+                    🔵 Schedule
                     <span class="category-dot schedule-dot"></span>
                 </button>
                 <button class="filter-btn category-filter" data-category="delegate" title="Filter Delegate tasks">
-                    Delegate
+                    🟠 Delegate
                     <span class="category-dot delegate-dot"></span>
                 </button>
                 <button class="filter-btn category-filter" data-category="dont-do" title="Filter Don't Do tasks">
-                    Don't Do
+                    🔴 Don't Do
                     <span class="category-dot dont-do-dot"></span>
                 </button>
             </div>
