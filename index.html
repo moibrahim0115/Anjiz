@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <meta name="color-scheme" content="dark">
-    <meta name="theme-color" content="#0a0e1a">
+    <meta name="theme-color" content="#02040a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>ANJIZ — Matrix Task Manager</title>
@@ -13,21 +13,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <style>
-        /* ═══════════════════════════════════════════════════════════════
-           ANJIZ 2026 — Ultra-Premium Mobile Experience
-           Next-Gen · Fluid · Distinctive · Award-Winning UI
-           ═══════════════════════════════════════════════════════════════ */
-
         :root {
-            /* ── Core Palette ── */
             --void: #02040a;
             --deep: #060912;
             --surface: #0d1117;
             --surface-raised: #161b22;
             --surface-hover: #1c2128;
             --surface-active: #21262d;
-
-            /* ── Premium Accents ── */
             --emerald: #00d9a5;
             --emerald-soft: rgba(0, 217, 165, 0.1);
             --emerald-glow: rgba(0, 217, 165, 0.35);
@@ -39,30 +31,21 @@
             --ruby-soft: rgba(248, 81, 73, 0.1);
             --violet: #a371f7;
             --violet-soft: rgba(163, 113, 247, 0.1);
-
-            /* ── Neutral Spectrum ── */
             --snow: #f0f6fc;
             --frost: #c9d1d9;
             --mist: #8b949e;
             --slate: #6e7681;
             --stone: #484f58;
-
-            /* ── Glass System ── */
             --glass: rgba(13, 17, 23, 0.72);
             --glass-elevated: rgba(22, 27, 34, 0.88);
             --glass-border: rgba(255, 255, 255, 0.05);
             --glass-border-hover: rgba(255, 255, 255, 0.12);
-            --glass-shine: rgba(255, 255, 255, 0.03);
-
-            /* ── Elevation ── */
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.5);
             --shadow-md: 0 8px 24px rgba(0,0,0,0.6);
             --shadow-lg: 0 16px 48px rgba(0,0,0,0.7);
             --shadow-xl: 0 24px 80px rgba(0,0,0,0.8);
             --shadow-glow: 0 0 40px var(--emerald-glow);
             --shadow-ambient: 0 0 120px rgba(0, 217, 165, 0.08);
-
-            /* ── Motion ── */
             --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
             --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
@@ -71,8 +54,6 @@
             --duration-fast: 250ms;
             --duration-normal: 400ms;
             --duration-slow: 700ms;
-
-            /* ── Spacing Scale ── */
             --space-1: 4px;
             --space-2: 8px;
             --space-3: 12px;
@@ -82,20 +63,14 @@
             --space-8: 32px;
             --space-10: 40px;
             --space-12: 48px;
-
-            /* ── Radii ── */
             --radius-sm: 12px;
             --radius-md: 16px;
             --radius-lg: 20px;
             --radius-xl: 28px;
             --radius-2xl: 36px;
             --radius-full: 9999px;
-
-            /* ── Safe Areas ── */
             --safe-top: env(safe-area-inset-top, 0px);
             --safe-bottom: env(safe-area-inset-bottom, 0px);
-            --safe-left: env(safe-area-inset-left, 0px);
-            --safe-right: env(safe-area-inset-right, 0px);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -115,7 +90,7 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════
-           Ambient Canvas — Living Background
+           Ambient Background
            ═══════════════════════════════════════════════════════════════ */
         .ambient-canvas {
             position: fixed;
@@ -144,14 +119,12 @@
             top: -10%; left: -5%;
             animation: orbDrift1 20s ease-in-out infinite;
         }
-
         .ambient-orb:nth-child(2) {
             width: 350px; height: 350px;
             background: radial-gradient(circle, rgba(88,166,255,0.2), transparent 70%);
             top: 30%; right: -10%;
             animation: orbDrift2 25s ease-in-out infinite reverse;
         }
-
         .ambient-orb:nth-child(3) {
             width: 300px; height: 300px;
             background: radial-gradient(circle, rgba(163,113,247,0.15), transparent 70%);
@@ -176,7 +149,6 @@
             66% { transform: translate(-30px, -20px) scale(0.94); }
         }
 
-        /* Grid Pattern Overlay */
         .grid-overlay {
             position: fixed;
             inset: 0;
@@ -191,7 +163,7 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════
-           App Header — Floating Glass
+           App Header
            ═══════════════════════════════════════════════════════════════ */
         .app-header {
             position: fixed;
@@ -201,10 +173,6 @@
             z-index: 100;
             padding: calc(var(--safe-top) + var(--space-3)) var(--space-4) var(--space-3);
             transition: all var(--duration-normal) var(--ease-out);
-        }
-
-        .app-header.scrolled {
-            padding-top: calc(var(--safe-top) + var(--space-2));
         }
 
         .app-header.scrolled .header-inner {
@@ -347,8 +315,49 @@
             50% { transform: scale(1.15); box-shadow: 0 2px 16px rgba(248,81,73,0.7); }
         }
 
+        /* Focus Mode Button */
+        .btn-focus {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--violet), #8b5cf6);
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+            font-size: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(163,113,247,0.3);
+        }
+
+        .btn-focus::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-focus:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn-focus:active {
+            transform: scale(0.92);
+        }
+
+        .btn-focus i {
+            position: relative;
+            z-index: 1;
+        }
+
         /* ═══════════════════════════════════════════════════════════════
-           Main Content Area
+           Main Content
            ═══════════════════════════════════════════════════════════════ */
         .app-main {
             position: relative;
@@ -358,9 +367,7 @@
             padding: calc(90px + var(--safe-top)) var(--space-4) calc(140px + var(--safe-bottom));
         }
 
-        /* ═══════════════════════════════════════════════════════════════
-           Greeting Section — Cinematic Entry
-           ═══════════════════════════════════════════════════════════════ */
+        /* Greeting */
         .greeting-section {
             margin-bottom: var(--space-6);
             animation: fadeSlideUp 0.8s var(--ease-out) both;
@@ -416,9 +423,7 @@
             opacity: 0.4;
         }
 
-        /* ═══════════════════════════════════════════════════════════════
-           Progress Section — Holographic Card
-           ═══════════════════════════════════════════════════════════════ */
+        /* Progress */
         .progress-section {
             display: flex;
             align-items: center;
@@ -546,9 +551,7 @@
             border-radius: 4px;
         }
 
-        /* ═══════════════════════════════════════════════════════════════
-           Quick Add — Immersive Input
-           ═══════════════════════════════════════════════════════════════ */
+        /* Quick Add */
         .quick-add-section {
             margin-bottom: var(--space-6);
             animation: fadeSlideUp 0.8s var(--ease-out) 0.15s both;
@@ -636,7 +639,7 @@
             filter: drop-shadow(0 0 8px var(--emerald-glow));
         }
 
-        /* ── Category Selector ── */
+        /* Category Selector */
         .category-scroll {
             display: flex;
             gap: var(--space-2);
@@ -721,7 +724,7 @@
         .chip-indicator.delegate { background: #f0883e; }
         .chip-indicator.dont-do { background: #f85149; }
 
-        /* ── Add Button — Premium CTA ── */
+        /* Add Button */
         .btn-add {
             width: 100%;
             padding: var(--space-4);
@@ -772,7 +775,7 @@
             transform: rotate(90deg) scale(1.2);
         }
 
-        /* ── Reminder Toggle ── */
+        /* Reminder Toggle */
         .reminder-row {
             display: flex;
             align-items: center;
@@ -797,7 +800,6 @@
             filter: drop-shadow(0 0 6px rgba(240,136,62,0.4));
         }
 
-        /* Toggle Switch — iOS Style Premium */
         .toggle-switch {
             width: 52px;
             height: 30px;
@@ -869,9 +871,7 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* ═══════════════════════════════════════════════════════════════
-           Filter Bar — Pill Navigation
-           ═══════════════════════════════════════════════════════════════ */
+        /* Filters */
         .filter-section {
             margin-bottom: var(--space-6);
             animation: fadeSlideUp 0.8s var(--ease-out) 0.2s both;
@@ -957,9 +957,7 @@
         .filter-dot.delegate { background: #f0883e; }
         .filter-dot.dont-do { background: #f85149; }
 
-        /* ═══════════════════════════════════════════════════════════════
-           Task List — Premium Card Stack
-           ═══════════════════════════════════════════════════════════════ */
+        /* Tasks */
         .tasks-section {
             animation: fadeSlideUp 0.8s var(--ease-out) 0.25s both;
         }
@@ -1081,7 +1079,6 @@
             color: var(--slate);
         }
 
-        /* ── Checkbox — Premium Toggle ── */
         .task-check {
             width: 26px;
             height: 26px;
@@ -1136,7 +1133,6 @@
             transform: scale(1.2);
         }
 
-        /* ── Task Content ── */
         .task-body {
             flex: 1;
             min-width: 0;
@@ -1208,7 +1204,6 @@
             50% { opacity: 0.7; box-shadow: 0 0 16px rgba(248,81,73,0.5); }
         }
 
-        /* ── Task Actions ── */
         .task-actions {
             display: flex;
             flex-direction: column;
@@ -1257,9 +1252,7 @@
             box-shadow: 0 0 12px rgba(248,81,73,0.2);
         }
 
-        /* ═══════════════════════════════════════════════════════════════
-           Empty State — Cinematic
-           ═══════════════════════════════════════════════════════════════ */
+        /* Empty State */
         .empty-state {
             text-align: center;
             padding: var(--space-12) var(--space-6);
@@ -1318,9 +1311,7 @@
             line-height: 1.6;
         }
 
-        /* ═══════════════════════════════════════════════════════════════
-           Bottom Navigation — Revolutionary Dock
-           ═══════════════════════════════════════════════════════════════ */
+        /* Bottom Dock */
         .app-footer {
             position: fixed;
             bottom: 0;
@@ -1463,53 +1454,282 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════
-           Animations
+           FOCUS MODE OVERLAY — The Killer Feature
            ═══════════════════════════════════════════════════════════════ */
+        .focus-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: var(--void);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.6s var(--ease-out);
+        }
+
+        .focus-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Particle Canvas */
+        .focus-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        /* Focus Content */
+        .focus-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 480px;
+            padding: var(--space-6);
+            text-align: center;
+        }
+
+        /* Close Button */
+        .focus-close {
+            position: absolute;
+            top: calc(var(--safe-top) + var(--space-4));
+            right: var(--space-4);
+            z-index: 10;
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-full);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--mist);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all var(--duration-fast) var(--ease-out);
+            backdrop-filter: blur(12px);
+        }
+
+        .focus-close:hover {
+            background: rgba(248,81,73,0.1);
+            color: var(--ruby);
+            border-color: rgba(248,81,73,0.2);
+            transform: rotate(90deg);
+        }
+
+        /* Timer */
+        .focus-timer-display {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--snow);
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: var(--space-4);
+            text-shadow: 0 0 40px rgba(0,217,165,0.2);
+            position: relative;
+        }
+
+        .focus-timer-display .timer-colon {
+            animation: colonBlink 1s ease-in-out infinite;
+            color: var(--emerald);
+        }
+
+        @keyframes colonBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .focus-timer-label {
+            font-size: 0.85rem;
+            color: var(--slate);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: var(--space-8);
+        }
+
+        /* Timer Controls */
+        .focus-controls {
+            display: flex;
+            gap: var(--space-3);
+            justify-content: center;
+            margin-bottom: var(--space-8);
+        }
+
+        .focus-btn {
+            padding: var(--space-3) var(--space-5);
+            border-radius: var(--radius-full);
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+            border: 1.5px solid;
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            backdrop-filter: blur(12px);
+        }
+
+        .focus-btn-primary {
+            background: linear-gradient(135deg, var(--emerald), #00b894);
+            border-color: transparent;
+            color: var(--void);
+            box-shadow: 0 4px 24px var(--emerald-glow), 0 0 0 1px rgba(0,217,165,0.2);
+        }
+
+        .focus-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--emerald-glow);
+        }
+
+        .focus-btn-primary:active {
+            transform: scale(0.95);
+        }
+
+        .focus-btn-secondary {
+            background: rgba(255,255,255,0.03);
+            border-color: rgba(255,255,255,0.08);
+            color: var(--mist);
+        }
+
+        .focus-btn-secondary:hover {
+            background: rgba(255,255,255,0.06);
+            color: var(--snow);
+            border-color: rgba(255,255,255,0.12);
+        }
+
+        /* Focus Tasks */
+        .focus-tasks {
+            text-align: left;
+            max-height: 40vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+
+        .focus-tasks::-webkit-scrollbar { display: none; }
+
+        .focus-tasks-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--slate);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .focus-tasks-title i {
+            color: var(--emerald);
+        }
+
+        .focus-task-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-4);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-2);
+            transition: all var(--duration-fast);
+            cursor: pointer;
+        }
+
+        .focus-task-item:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.08);
+            transform: translateX(4px);
+        }
+
+        .focus-task-item.completed {
+            opacity: 0.4;
+        }
+
+        .focus-task-item.completed .focus-task-text {
+            text-decoration: line-through;
+            color: var(--slate);
+        }
+
+        .focus-task-check {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            border: 2px solid var(--stone);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 10px;
+            color: transparent;
+            transition: all var(--duration-fast);
+        }
+
+        .focus-task-check.checked {
+            background: var(--emerald);
+            border-color: var(--emerald);
+            color: var(--void);
+            box-shadow: 0 0 12px var(--emerald-glow);
+        }
+
+        .focus-task-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--snow);
+            flex: 1;
+        }
+
+        /* Celebration Canvas */
+        .celebration-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            pointer-events: none;
+            display: none;
+        }
+
+        .celebration-canvas.active {
+            display: block;
+        }
+
+        /* Animations */
         @keyframes fadeSlideUp {
             from { opacity: 0; transform: translateY(24px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ═══════════════════════════════════════════════════════════════
-           Scrollbar
-           ═══════════════════════════════════════════════════════════════ */
         ::-webkit-scrollbar { width: 0; height: 0; }
 
-        /* ═══════════════════════════════════════════════════════════════
-           Desktop Enhancement
-           ═══════════════════════════════════════════════════════════════ */
         @media (min-width: 768px) {
             .app-main {
                 padding-top: calc(100px + var(--safe-top));
             }
-
             .task-item:hover {
                 transform: translateX(6px);
                 border-color: var(--glass-border-hover);
                 box-shadow: var(--shadow-md), 0 0 30px rgba(0,217,165,0.05);
             }
-
             .task-actions {
                 opacity: 0;
             }
-
             .task-item:hover .task-actions {
                 opacity: 1;
                 transform: translateX(0);
             }
-
             .footer-dock {
                 padding: var(--space-4) var(--space-6);
             }
         }
 
-        /* ═══════════════════════════════════════════════════════════════
-           Reduced Motion
-           ═══════════════════════════════════════════════════════════════ */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
         }
@@ -1535,6 +1755,35 @@
         </defs>
     </svg>
 
+    <!-- Celebration Canvas -->
+    <canvas class="celebration-canvas" id="celebrationCanvas"></canvas>
+
+    <!-- Focus Mode Overlay -->
+    <div class="focus-overlay" id="focusOverlay">
+        <canvas class="focus-canvas" id="focusCanvas"></canvas>
+        <button class="focus-close" id="focusClose" title="Exit Focus">
+            <i class="fas fa-xmark"></i>
+        </button>
+        <div class="focus-content">
+            <div class="focus-timer-display" id="focusTimerDisplay">
+                <span id="timerMin">25</span><span class="timer-colon">:</span><span id="timerSec">00</span>
+            </div>
+            <div class="focus-timer-label" id="focusTimerLabel">Deep Focus Session</div>
+            <div class="focus-controls">
+                <button class="focus-btn focus-btn-primary" id="focusStartBtn">
+                    <i class="fas fa-play"></i> Start
+                </button>
+                <button class="focus-btn focus-btn-secondary" id="focusPauseBtn" style="display:none">
+                    <i class="fas fa-pause"></i> Pause
+                </button>
+                <button class="focus-btn focus-btn-secondary" id="focusResetBtn">
+                    <i class="fas fa-rotate-left"></i> Reset
+                </button>
+            </div>
+            <div class="focus-tasks" id="focusTasks"></div>
+        </div>
+    </div>
+
     <!-- App Header -->
     <header class="app-header" id="appHeader">
         <div class="header-inner">
@@ -1545,6 +1794,9 @@
                 <span class="brand-wordmark">ANJIZ</span>
             </div>
             <div class="header-actions">
+                <button class="btn-focus" id="focusModeBtn" title="Focus Mode">
+                    <i class="fas fa-brain"></i>
+                </button>
                 <button class="header-btn" id="notificationBtn" title="Notifications">
                     <i class="fas fa-bell"></i>
                     <span class="badge" id="notificationBadge" style="display:none">0</span>
@@ -1714,7 +1966,7 @@
 
     <script>
         // ═══════════════════════════════════════════════════════════════
-        // ANJIZ Mobile App Logic — 2026 Edition
+        // ANJIZ Mobile App Logic — 2026 Edition with Focus Mode
         // ═══════════════════════════════════════════════════════════════
 
         // ── State ──
@@ -1724,6 +1976,12 @@
         let reminderActive = false;
         let tasks = JSON.parse(localStorage.getItem('anjiz_tasks')) || [];
         let currentUser = null;
+
+        // Focus Mode State
+        let focusTimer = null;
+        let focusTimeLeft = 25 * 60;
+        let focusRunning = false;
+        let focusPaused = false;
 
         // ── DOM ──
         const appHeader = document.getElementById('appHeader');
@@ -1744,7 +2002,341 @@
         const progressSublabel = document.getElementById('progressSublabel');
         const progressBarMini = document.getElementById('progressBarMini');
 
-        // ── Auth Check ──
+        // Focus Mode DOM
+        const focusOverlay = document.getElementById('focusOverlay');
+        const focusModeBtn = document.getElementById('focusModeBtn');
+        const focusClose = document.getElementById('focusClose');
+        const focusTimerDisplay = document.getElementById('focusTimerDisplay');
+        const timerMin = document.getElementById('timerMin');
+        const timerSec = document.getElementById('timerSec');
+        const focusTimerLabel = document.getElementById('focusTimerLabel');
+        const focusStartBtn = document.getElementById('focusStartBtn');
+        const focusPauseBtn = document.getElementById('focusPauseBtn');
+        const focusResetBtn = document.getElementById('focusResetBtn');
+        const focusTasks = document.getElementById('focusTasks');
+        const focusCanvas = document.getElementById('focusCanvas');
+        const celebrationCanvas = document.getElementById('celebrationCanvas');
+
+        // ═══════════════════════════════════════════════════════════════
+        // FOCUS MODE — Particle Background & Timer
+        // ═══════════════════════════════════════════════════════════════
+
+        // Particle System
+        let particles = [];
+        let mouseX = 0, mouseY = 0;
+        let focusCtx = focusCanvas.getContext('2d');
+        let animFrame = null;
+
+        function resizeFocusCanvas() {
+            focusCanvas.width = window.innerWidth;
+            focusCanvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * focusCanvas.width;
+                this.y = Math.random() * focusCanvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+                this.baseColor = Math.random() > 0.5 ? '0, 217, 165' : '88, 166, 255';
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                // Mouse attraction
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 200) {
+                    this.vx += dx * 0.0001;
+                    this.vy += dy * 0.0001;
+                }
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce
+                if (this.x < 0 || this.x > focusCanvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > focusCanvas.height) this.vy *= -1;
+
+                // Friction
+                this.vx *= 0.99;
+                this.vy *= 0.99;
+            }
+
+            draw() {
+                focusCtx.beginPath();
+                focusCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                focusCtx.fillStyle = `rgba(${this.baseColor}, ${this.alpha})`;
+                focusCtx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(80, Math.floor((focusCanvas.width * focusCanvas.height) / 8000));
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 120) {
+                        const alpha = (1 - dist / 120) * 0.15;
+                        focusCtx.beginPath();
+                        focusCtx.moveTo(particles[i].x, particles[i].y);
+                        focusCtx.lineTo(particles[j].x, particles[j].y);
+                        focusCtx.strokeStyle = `rgba(0, 217, 165, ${alpha})`;
+                        focusCtx.lineWidth = 0.5;
+                        focusCtx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            focusCtx.clearRect(0, 0, focusCanvas.width, focusCanvas.height);
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            drawConnections();
+            animFrame = requestAnimationFrame(animateParticles);
+        }
+
+        // Focus Mode Events
+        focusModeBtn.addEventListener('click', () => {
+            focusOverlay.style.display = 'flex';
+            setTimeout(() => focusOverlay.classList.add('active'), 10);
+            resizeFocusCanvas();
+            initParticles();
+            animateParticles();
+            renderFocusTasks();
+        });
+
+        focusClose.addEventListener('click', () => {
+            focusOverlay.classList.remove('active');
+            setTimeout(() => {
+                focusOverlay.style.display = 'none';
+                if (animFrame) cancelAnimationFrame(animFrame);
+            }, 600);
+        });
+
+        focusCanvas.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        focusCanvas.addEventListener('touchmove', (e) => {
+            mouseX = e.touches[0].clientX;
+            mouseY = e.touches[0].clientY;
+        });
+
+        window.addEventListener('resize', () => {
+            if (focusOverlay.classList.contains('active')) {
+                resizeFocusCanvas();
+                initParticles();
+            }
+        });
+
+        // Timer Logic
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60);
+            const s = seconds % 60;
+            return {
+                min: m.toString().padStart(2, '0'),
+                sec: s.toString().padStart(2, '0')
+            };
+        }
+
+        function updateTimerDisplay() {
+            const t = formatTime(focusTimeLeft);
+            timerMin.textContent = t.min;
+            timerSec.textContent = t.sec;
+        }
+
+        function startFocusTimer() {
+            if (focusRunning) return;
+            focusRunning = true;
+            focusPaused = false;
+            focusStartBtn.style.display = 'none';
+            focusPauseBtn.style.display = 'flex';
+            focusTimerLabel.textContent = 'Focusing...';
+
+            focusTimer = setInterval(() => {
+                if (focusTimeLeft > 0) {
+                    focusTimeLeft--;
+                    updateTimerDisplay();
+                } else {
+                    completeFocusSession();
+                }
+            }, 1000);
+        }
+
+        function pauseFocusTimer() {
+            if (!focusRunning) return;
+            clearInterval(focusTimer);
+            focusRunning = false;
+            focusPaused = true;
+            focusStartBtn.style.display = 'flex';
+            focusStartBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
+            focusPauseBtn.style.display = 'none';
+            focusTimerLabel.textContent = 'Paused';
+        }
+
+        function resetFocusTimer() {
+            clearInterval(focusTimer);
+            focusRunning = false;
+            focusPaused = false;
+            focusTimeLeft = 25 * 60;
+            updateTimerDisplay();
+            focusStartBtn.style.display = 'flex';
+            focusStartBtn.innerHTML = '<i class="fas fa-play"></i> Start';
+            focusPauseBtn.style.display = 'none';
+            focusTimerLabel.textContent = 'Deep Focus Session';
+        }
+
+        function completeFocusSession() {
+            clearInterval(focusTimer);
+            focusRunning = false;
+            focusStartBtn.style.display = 'flex';
+            focusStartBtn.innerHTML = '<i class="fas fa-play"></i> Start';
+            focusPauseBtn.style.display = 'none';
+            focusTimerLabel.textContent = 'Session Complete!';
+            focusTimerLabel.style.color = 'var(--emerald)';
+
+            // Celebration
+            triggerCelebration();
+
+            // Save session
+            const sessions = JSON.parse(localStorage.getItem('anjiz_focus_sessions') || '[]');
+            sessions.push({
+                date: new Date().toISOString(),
+                duration: 25
+            });
+            localStorage.setItem('anjiz_focus_sessions', JSON.stringify(sessions));
+        }
+
+        focusStartBtn.addEventListener('click', startFocusTimer);
+        focusPauseBtn.addEventListener('click', pauseFocusTimer);
+        focusResetBtn.addEventListener('click', resetFocusTimer);
+
+        // Render Focus Tasks
+        function renderFocusTasks() {
+            const doFirst = tasks.filter(t => t.category === 'do-first' && !t.completed);
+
+            if (doFirst.length === 0) {
+                focusTasks.innerHTML = `
+                    <div class="focus-tasks-title"><i class="fas fa-bullseye"></i> Priority Tasks</div>
+                    <div style="text-align:center; padding: 20px; color: var(--slate); font-size: 0.9rem;">
+                        No "Do First" tasks. Add some to focus on!
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '<div class="focus-tasks-title"><i class="fas fa-bullseye"></i> Priority Tasks</div>';
+            doFirst.forEach(task => {
+                html += `
+                    <div class="focus-task-item ${task.completed ? 'completed' : ''}" onclick="toggleFocusTask(${task.id})">
+                        <div class="focus-task-check ${task.completed ? 'checked' : ''}">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="focus-task-text">${escapeHtml(task.text)}</div>
+                    </div>
+                `;
+            });
+            focusTasks.innerHTML = html;
+        }
+
+        window.toggleFocusTask = function(id) {
+            const t = tasks.find(x => x.id === id);
+            if (t) {
+                t.completed = !t.completed;
+                saveTasks();
+                renderTasks();
+                renderFocusTasks();
+            }
+        };
+
+        // ═══════════════════════════════════════════════════════════════
+        // CELEBRATION SYSTEM — Confetti Particles
+        // ═══════════════════════════════════════════════════════════════
+
+        function triggerCelebration() {
+            const ctx = celebrationCanvas.getContext('2d');
+            celebrationCanvas.width = window.innerWidth;
+            celebrationCanvas.height = window.innerHeight;
+            celebrationCanvas.classList.add('active');
+
+            const confetti = [];
+            const colors = ['#00d9a5', '#58a6ff', '#f0883e', '#f85149', '#a371f7', '#ffffff'];
+
+            for (let i = 0; i < 150; i++) {
+                confetti.push({
+                    x: celebrationCanvas.width / 2,
+                    y: celebrationCanvas.height / 2,
+                    vx: (Math.random() - 0.5) * 20,
+                    vy: (Math.random() - 0.5) * 20 - 5,
+                    radius: Math.random() * 4 + 2,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 10,
+                    gravity: 0.2,
+                    drag: 0.98,
+                    life: 1
+                });
+            }
+
+            function animateCelebration() {
+                ctx.clearRect(0, 0, celebrationCanvas.width, celebrationCanvas.height);
+                let alive = false;
+
+                confetti.forEach(c => {
+                    if (c.life > 0) {
+                        alive = true;
+                        c.x += c.vx;
+                        c.y += c.vy;
+                        c.vy += c.gravity;
+                        c.vx *= c.drag;
+                        c.vy *= c.drag;
+                        c.rotation += c.rotationSpeed;
+                        c.life -= 0.008;
+
+                        ctx.save();
+                        ctx.translate(c.x, c.y);
+                        ctx.rotate(c.rotation * Math.PI / 180);
+                        ctx.globalAlpha = c.life;
+                        ctx.fillStyle = c.color;
+                        ctx.fillRect(-c.radius, -c.radius / 2, c.radius * 2, c.radius);
+                        ctx.restore();
+                    }
+                });
+
+                if (alive) {
+                    requestAnimationFrame(animateCelebration);
+                } else {
+                    celebrationCanvas.classList.remove('active');
+                }
+            }
+
+            animateCelebration();
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // CORE APP LOGIC
+        // ═══════════════════════════════════════════════════════════════
+
+        // Auth Check
         function checkAuth() {
             const stored = localStorage.getItem('anjiz_user');
             if (!stored) {
@@ -1760,7 +2352,7 @@
             }
         }
 
-        // ── Greeting Time ──
+        // Greeting Time
         function setGreeting() {
             const hour = new Date().getHours();
             let greeting = 'Good Morning';
@@ -1770,12 +2362,12 @@
             greetingTime.textContent = greeting;
         }
 
-        // ── Header Scroll ──
+        // Header Scroll
         window.addEventListener('scroll', () => {
             appHeader.classList.toggle('scrolled', window.scrollY > 10);
         }, { passive: true });
 
-        // ── Category Selection ──
+        // Category Selection
         categoryChips.forEach(chip => {
             chip.addEventListener('click', () => {
                 categoryChips.forEach(c => c.classList.remove('active'));
@@ -1784,7 +2376,7 @@
             });
         });
 
-        // ── Reminder Toggle ──
+        // Reminder Toggle
         reminderToggle.addEventListener('click', () => {
             reminderActive = !reminderActive;
             reminderToggle.classList.toggle('active', reminderActive);
@@ -1797,7 +2389,7 @@
             }
         });
 
-        // ── Add Task ──
+        // Add Task
         function addTask() {
             const text = taskInput.value.trim();
             if (!text) return;
@@ -1842,7 +2434,7 @@
             if (e.key === 'Enter') addTask();
         });
 
-        // ── Render Tasks ──
+        // Render Tasks
         function renderTasks() {
             let filtered = [...tasks];
 
@@ -1928,13 +2520,16 @@
             return d.innerHTML;
         }
 
-        // ── Task Actions ──
+        // Task Actions
         window.toggleTask = function(id) {
             const t = tasks.find(x => x.id === id);
             if (t) {
                 t.completed = !t.completed;
                 saveTasks();
                 renderTasks();
+                if (focusOverlay.classList.contains('active')) {
+                    renderFocusTasks();
+                }
             }
         };
 
@@ -1946,6 +2541,9 @@
                 t.text = newText.trim();
                 saveTasks();
                 renderTasks();
+                if (focusOverlay.classList.contains('active')) {
+                    renderFocusTasks();
+                }
             }
         };
 
@@ -1954,10 +2552,13 @@
                 tasks = tasks.filter(x => x.id !== id);
                 saveTasks();
                 renderTasks();
+                if (focusOverlay.classList.contains('active')) {
+                    renderFocusTasks();
+                }
             }
         };
 
-        // ── Filters ──
+        // Filters
         filterPills.forEach(pill => {
             pill.addEventListener('click', () => {
                 const filter = pill.dataset.filter;
@@ -1984,7 +2585,7 @@
             });
         }
 
-        // ── Stats with Pulse Animation ──
+        // Stats with Pulse Animation
         function updateStats() {
             const total = tasks.length;
             const done = tasks.filter(t => t.completed).length;
@@ -1994,7 +2595,6 @@
             const statActive = document.getElementById('statActive');
             const statDone = document.getElementById('statDone');
 
-            // Animate values
             animateValue(statTotal, parseInt(statTotal.textContent), total, 400);
             animateValue(statActive, parseInt(statActive.textContent), active, 400);
             animateValue(statDone, parseInt(statDone.textContent), done, 400);
@@ -2028,7 +2628,7 @@
             const total = tasks.length;
             const done = tasks.filter(t => t.completed).length;
             const pct = total > 0 ? Math.round((done / total) * 100) : 0;
-            const circumference = 2 * Math.PI * 36; // r=36
+            const circumference = 2 * Math.PI * 36;
             const offset = circumference - (pct / 100) * circumference;
 
             progressFill.style.strokeDashoffset = offset;
@@ -2044,18 +2644,18 @@
             }
         }
 
-        // ── Storage ──
+        // Storage
         function saveTasks() {
             localStorage.setItem('anjiz_tasks', JSON.stringify(tasks));
         }
 
-        // ── Logout ──
+        // Logout
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.removeItem('anjiz_user');
             window.location.href = 'login.html';
         });
 
-        // ── Init ──
+        // Init
         checkAuth();
         setGreeting();
         renderTasks();
